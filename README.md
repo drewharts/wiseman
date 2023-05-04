@@ -17,4 +17,5 @@ Music is an extension of our personality. What we listen to, how much we listen 
 
 I am going to use the required technologies in the following ways.
 
- **HTML** - Uses correct HTML structure for application. Two HTML pages. One for Spotify login and one for the displaying of results. Hyperlinks to choice artifact.
+- **HTML** - Uses correct HTML structure for application. Two HTML pages. One for Spotify login and one for the displaying of results. Hyperlinks to choice artifact.
+- **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
