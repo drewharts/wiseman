@@ -12,3 +12,9 @@ Music is an extension of our personality. What we listen to, how much we listen 
 - Utilization of ChatGPT API to generate results based on Spotify results
 - Display results and give user the ability get more information on each song
 - Ability to export a copy of the results for user to share with friends
+
+## Technologies
+
+I am going to use the required technologies in the following ways.
+
+ **HTML** - Uses correct HTML structure for application. Two HTML pages. One for Spotify login and one for the displaying of results. Hyperlinks to choice artifact.
