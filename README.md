@@ -4,3 +4,11 @@ Music is an extension of our personality. What we listen to, how much we listen 
 ## Design
 ![Mock](WisemanHome.jpg)
 ![Mock](WisemanResultsPage.jpg)
+
+## Key Features
+-Secure Login using HTTPS with Spotify API
+-Pulling top artists from User's spotify
+-The user can choose to pull top artists (all-time, last year, last month)
+-Utilization of ChatGPT API to generate results based on Spotify results
+-Display results and give user the ability get more information on each song
+-Ability to export a copy of the results for user to share with friends
