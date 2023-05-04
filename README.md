@@ -1,2 +1,3 @@
 # startup
-An example start up project 
+## Elevator Pitch
+
