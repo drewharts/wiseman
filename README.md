@@ -20,4 +20,7 @@ I am going to use the required technologies in the following ways.
 - **HTML** - Uses correct HTML structure for application. Two HTML pages. One for Spotify login and one for the displaying of results. Hyperlinks to choice artifact.
 - **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
 - **JavaScript** - Provides login with Spotify, choice display, connection to ChatGPT API, displaying results, backend endpoint calls.
-- 
+- **React** - Application ported to use the React web framework.
+- **Authentication** - Will appropriately and securely log user into their spotify and return information regarding their account. 
+- **DB** - Database will store results generated for each user so they can refer back to them when logging in at a later time.
+- **WebSocket** - Application will fetch old generated data and display them for the user. 
