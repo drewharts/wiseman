@@ -24,3 +24,15 @@ I am going to use the required technologies in the following ways.
 - **Authentication** - Will appropriately and securely log user into their spotify and return information regarding their account. 
 - **DB** - Database will store results generated for each user so they can refer back to them when logging in at a later time.
 - **WebSocket** - Application will fetch old generated data and display them for the user. 
+
+## HTML deliverable
+
+For this deliverable I added the application structure.
+
+- **HTML pages** - Three HTML page that represent the ability to login with Wiseman, Spotify and display results.
+- **Links** - The login page automatically links to the spotify and results page.
+- **Text** - Each of the steps to login or display results are clearly labeled with what they're going to be.
+- **Images** - I added two images, a spotify logo and an image representing the name wiseman. 😔
+- **Login** - Input box and submit button for login for Wiseman and for Spotify.
+- **Database** - The results genereated will be stored in a database that we get from Spotify API and ChatGPT.
+- **WebSocket** - You will be able to see all of your friends current favorite artists.
