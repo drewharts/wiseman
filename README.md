@@ -36,3 +36,14 @@ For this deliverable I added the application structure.
 - **Login** - Input box and submit button for login for Wiseman and for Spotify.
 - **Database** - The results genereated will be stored in a database that we get from Spotify API and ChatGPT.
 - **WebSocket** - You will be able to see all of your friends current favorite artists.
+
+## CSS deliverable
+
+For this deliverable I properly styled the application into its final appearance.
+
+- **Header, footer, and main content body**
+- **Navigation elements** - I made navigation elements responsive to hovering and more modern looking.
+- **Responsive to window resizing** - My app looks great on all window sizes and devices (mostly)
+- **Application elements** - Used good contrast and whitespace
+- **Application text content** - Consistent fonts
+- **Application images** - Made some images the background of the actual page. 
