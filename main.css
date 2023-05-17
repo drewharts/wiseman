@@ -8,78 +8,89 @@
 /* Set a modern font */
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-image: url('FrankOcean.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-/* Add a subtle background color */
-body {
-  background-color: #f5f5f5;
+/* Style the header */
+header {
+  background-color: #5a7862;
+  color: #fff;
+  padding: 20px;
+  border-bottom: none; /* Remove the line separating the header and body */
 }
 
-/* Center the content */
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* Add spacing between elements */
-h1, h2, h3, p, a, img {
-  margin-bottom: 10px;
-}
-
-/* Style headings with a modern font and bold text */
-h1, h2, h3 {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+/* Style the logo */
+header .logo {
+  font-size: 24px;
   font-weight: bold;
 }
 
-/* Add some padding and a border to images */
-img {
+/* Style the menu container */
+header menu {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Style links with a chic underline effect */
-a {
-  color: #333;
-  text-decoration: none;
-  position: relative;
-}
-
-a:hover {
-  color: #666;
-}
-
-a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #666;
-  transform: scaleX(0);
-  transition: transform 0.3s ease-in-out;
-}
-
-a:hover::after {
-  transform: scaleX(1);
-}
-
-/* Create a modern-looking button */
-.button {
+/* Style the menu items */
+header menu li {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  margin-right: 20px;
 }
 
-.button:hover {
+header menu li:last-child {
+  margin-right: 0;
+}
+
+header menu a {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  transition: background-color 0.3s ease-in-out;
+  border-radius: 20px;
+}
+
+header menu a:hover {
   background-color: #666;
+}
+
+/* Style the active menu item */
+header menu .active a {
+  background-color: #666;
+}
+/* Set a modern font */
+h1 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Apply minimal text color */
+h1 {
+  color: white;
+}
+
+/* Add subtle text shadow */
+h1 {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Center the title */
+h1 {
+  text-align: center;
+}
+
+/* Add margin for spacing */
+h1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Adjust font size and weight for elegance */
+h1 {
+  font-size: 40px;
+  font-weight: bold;
 }
