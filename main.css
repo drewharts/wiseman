@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  height:100%;
+}
+
 /* Set a modern font */
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -13,7 +17,7 @@ body {
   background-position: center;
   text-align: center;
   border-bottom: none;
-
+  height:100%;
 }
 
 /* Style the header */
@@ -197,6 +201,30 @@ form {
 
 footer {
   flex-shrink: 0;
+}
+
+span {
+  color:white;
+}
+h3 {
+  color:white;
+}
+li {
+  color:white;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Media query for larger screens */
+@media (min-width: 1200px) {
+  body {
+    font-size: 18px;
+  }
 }
 
 
