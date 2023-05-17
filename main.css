@@ -11,6 +11,9 @@ body {
   background-image: url('FrankOcean.jpg');
   background-size: cover;
   background-position: center;
+  text-align: center;
+  border-bottom: none;
+
 }
 
 /* Style the header */
@@ -94,3 +97,107 @@ h1 {
   font-size: 40px;
   font-weight: bold;
 }
+
+h2 {
+  font-size: 28px;
+  color:white;
+  text-align: center;
+  padding: 20px;
+}
+
+p {
+  font-size: 15px;
+  color:white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Set a modern font */
+input[type="text"] {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Apply minimal border and background styles */
+input[type="text"] {
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* Add subtle box shadow on focus */
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Adjust text color */
+input[type="text"] {
+  color: #333;
+  width:300px;
+  height:56px;
+}
+
+/* Style placeholder text */
+input[type="text"]::placeholder {
+  color: #999;
+  
+}
+
+/* Add hover effect */
+input[type="text"]:hover {
+  border-color: #666;
+}
+
+/* Add transition for smooth effects */
+input[type="text"] {
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Set a modern font */
+button[type="submit"] {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Apply button styles */
+button[type="submit"] {
+  padding: 20px 40px;
+  background-color: white;
+  color: #666;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Add hover effect */
+button[type="submit"]:hover {
+  background-color: #666;
+}
+
+/* Adjust text color on hover */
+button[type="submit"]:hover {
+  color: #fff;
+}
+
+/* Add focus styles */
+button[type="submit"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  color:white;
+}
+
+form {
+  display: inline-block;
+  padding: 100px;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+
+
