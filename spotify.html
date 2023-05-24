@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="main.css">
-    <script src="src/script.ts" type="module"></script>
+    <script src="script.js" type="module"></script>
     <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wiseman</title>
@@ -41,6 +41,18 @@
         <input type="text" id="name" placeholder="Spotify Password" />
         <button type="submit">Login</button>
       </form>
+      
+      <section id="profile">
+        <h2>Logged in as <span id="displayName"></span></h2>
+        <span id="avatar"></span>
+        <ul>
+            <li>User ID: <span id="id"></span></li>
+            <li>Email: <span id="email"></span></li>
+            <li>Spotify URI: <a id="uri" href="#"></a></li>
+            <li>Link: <a id="url" href="#"></a></li>
+            <li>Profile Image: <span id="imgUrl"></span></li>
+        </ul>
+        </section>
     </main>
 
     <footer>
