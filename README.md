@@ -55,5 +55,5 @@ For this deliverable I made my application functional to login to spotify and gr
 
 - **login** - When you press enter or the login button it takes you to the voting page.
 - **database** - Displayed the top artists. Currently this is stored and retrieved from Spotify, but eventually we will store each user's results in the database.
-- **WebSocket** - I used the setInterval function to periodically increase a random vote count. This will be replaced with WebSocket messages later.
+- **WebSocket** - I'm going to use WebSocket to display my currently most listened to artists to everyone else that is using the web application. 
 - **application logic** - You can login to spotify and see your spotify profile and your top 3 listened to artists whether it's all-time, the last 6 months, or the last month. 
