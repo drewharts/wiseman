@@ -7,7 +7,9 @@ if (!code) {
 } else {
     const accessToken = await getAccessToken(clientId, code);
     const profile = await fetchProfile(accessToken);
+    const topArtists = await fetchTop(accessToken);
     populateUI(profile);
+    populateUIArtists(topArtists);
 }
 
 export async function redirectToAuthCodeFlow(clientId) {
@@ -74,6 +76,14 @@ async function fetchProfile(token) {
     return await result.json();
 }
 
+async function fetchTop(token) {
+    const result = await fetch("https://api.spotify.com/v1/me/top/artists", {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
+
+    return await result.json();
+}
+
 
 function populateUI(profile) {
     document.getElementById("displayName").innerText = profile.display_name;
@@ -89,4 +99,8 @@ function populateUI(profile) {
     document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
     document.getElementById("url").innerText = profile.href;
     document.getElementById("url").setAttribute("href", profile.href);
+}
+
+function populateUIArtists(topArtists) {
+    document.getElementById("artistName").innerText = topArtists[0].name;
 }
