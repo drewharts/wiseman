@@ -47,3 +47,13 @@ For this deliverable I properly styled the application into its final appearance
 - **Application elements** - Used good contrast and whitespace
 - **Application text content** - Consistent fonts
 - **Application images** - Made some images the background of the actual page. 
+
+
+## JavaScript deliverable
+
+For this deliverable I made my application functional to login to spotify and grab their profile details and top listened artists. 
+
+- **login** - When you press enter or the login button it takes you to the voting page.
+- **database** - Displayed the top artists. Currently this is stored and retrieved from Spotify, but eventually we will store each user's results in the database.
+- **WebSocket** - I used the setInterval function to periodically increase a random vote count. This will be replaced with WebSocket messages later.
+- **application logic** - You can login to spotify and see your spotify profile and your top 3 listened to artists whether it's all-time, the last 6 months, or the last month. 
