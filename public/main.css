@@ -1,0 +1,231 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height:100%;
+}
+
+/* Set a modern font */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-image: url('FrankOcean.jpg');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  border-bottom: none;
+  height:100%;
+}
+
+/* Style the header */
+header {
+  background-color: #5a7862;
+  color: #fff;
+  padding: 20px;
+  border-bottom: none; /* Remove the line separating the header and body */
+}
+
+/* Style the logo */
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Style the menu container */
+header menu {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the menu items */
+header menu li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+header menu li:last-child {
+  margin-right: 0;
+}
+
+header menu a {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  transition: background-color 0.3s ease-in-out;
+  border-radius: 20px;
+}
+
+header menu a:hover {
+  background-color: #666;
+}
+
+/* Style the active menu item */
+header menu .active a {
+  background-color: #666;
+}
+/* Set a modern font */
+h1 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Apply minimal text color */
+h1 {
+  color: white;
+}
+
+/* Add subtle text shadow */
+h1 {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Center the title */
+h1 {
+  text-align: center;
+}
+
+/* Add margin for spacing */
+h1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Adjust font size and weight for elegance */
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 28px;
+  color:white;
+  text-align: center;
+  padding: 20px;
+}
+
+p {
+  font-size: 15px;
+  color:white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Set a modern font */
+input[type="text"] {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Apply minimal border and background styles */
+input[type="text"] {
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* Add subtle box shadow on focus */
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Adjust text color */
+input[type="text"] {
+  color: #333;
+  width:300px;
+  height:56px;
+}
+
+/* Style placeholder text */
+input[type="text"]::placeholder {
+  color: #999;
+  
+}
+
+/* Add hover effect */
+input[type="text"]:hover {
+  border-color: #666;
+}
+
+/* Add transition for smooth effects */
+input[type="text"] {
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Set a modern font */
+button[type="submit"] {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Apply button styles */
+button[type="submit"] {
+  padding: 20px 40px;
+  background-color: white;
+  color: #666;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Add hover effect */
+button[type="submit"]:hover {
+  background-color: #666;
+}
+
+/* Adjust text color on hover */
+button[type="submit"]:hover {
+  color: #fff;
+}
+
+/* Add focus styles */
+button[type="submit"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  color:white;
+}
+
+form {
+  display: inline-block;
+  padding: 100px;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+span {
+  color:white;
+}
+h3 {
+  color:white;
+}
+li {
+  color:white;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Media query for larger screens */
+@media (min-width: 1200px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+
+
