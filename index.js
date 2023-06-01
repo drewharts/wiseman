@@ -12,6 +12,12 @@ apiRouter.get('/prevArtists', (_req, res) => {
   res.send(artsits);
 });
 
+// PostArtists
+apiRouter.post('/prevArtists', (req, res) => {
+  artists = updateArtists(req.body, artists);
+  res.send(artists);
+});
+
 
 const port = 4000;
 
