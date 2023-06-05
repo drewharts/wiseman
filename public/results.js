@@ -1,6 +1,8 @@
 const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
+// require('dotenv').config();
+// const apiKey = process.env.API_KEY;
 const apiUrl = 'https://api.openai.com/v1/chat/completions'; // ChatGPT url
-const apiKey = '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'; //ChatGPT api key
+const apiKey = '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'; //ChatGPT api key
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 // The model ID for ChatGPT (e.g., "gpt-3.5-turbo")
@@ -17,6 +19,18 @@ if (!code) {
 
     //chatGPT stuff
     const firstTracks = await getArtistTracks();
+
+    //check to see if user already generated response for specific artist
+
+    fetch('/prevArtists')
+  .then(response => response.json())
+  .then(data => {
+    // Handle the data
+  })
+  .catch(error => {
+    // Handle the error
+  });
+
     populateTracks(firstTracks);
     updateWebSocket();
 }
@@ -115,12 +129,16 @@ function populateTracks(topArtists) {
     const match3 = topArtists.match(/3\. (.+)/);
     const match4 = topArtists.match(/4\. (.+)/);
     const match5 = topArtists.match(/5\. (.+)/);
+
+    
     if (match) {
         document.getElementById("artist1Song1").innerText = match[1];
         document.getElementById("artist1Song2").innerText = match2[1];
         document.getElementById("artist1Song3").innerText = match3[1];
         document.getElementById("artist1Song4").innerText = match4[1];
         document.getElementById("artist1Song5").innerText = match5[1];
+
+        
     } else {
         const firstTracks = getArtistTracks();
         populateTracks(firstTracks);
@@ -165,6 +183,8 @@ async function sendChatMessage(message) {
 
 async function getArtistTracks() {
     const userInput = 'Give me 5 ' + document.getElementById("artistName1").innerText + ' tracks that arent on Spotify or Apple Music but are on Youtube';
+    //send this as post request to backend 
+    //then plug in string to api (which is secure) and then grab asychnous chatgptresponse 
     const reply = await sendChatMessage(userInput);
 
     console.log(reply);
