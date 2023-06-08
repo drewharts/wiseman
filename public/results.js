@@ -15,24 +15,49 @@ if (!code) {
     const topArtists = await fetchTop(accessToken);
     const profile = await fetchProfile(accessToken);
     populateProfile(profile);
-    populateUIArtists(topArtists); 
+    populateUIArtists(topArtists);
 
-    //chatGPT stuff
+    //make request to chatgpt endpoint
+
+    //this is getting the required input for chatGPT
     const firstTracks = await getArtistTracks();
+    console.log(firstTracks);
 
-    //check to see if user already generated response for specific artist
+    fetch(`/api/chatGPT/${firstTracks}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Response:', data);
+        populateTracks(data);
+        // Do something with the response data
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle any errors that occur during the request
+      });
 
-    fetch('/prevArtists')
-  .then(response => response.json())
-  .then(data => {
-    // Handle the data
-  })
-  .catch(error => {
-    // Handle the error
-  });
 
-    populateTracks(firstTracks);
-    updateWebSocket();
+
+  //   //chatGPT stuff
+  //   const firstTracks = await getArtistTracks();
+
+  //   //check to see if user already generated response for specific artist
+
+  //   fetch('/prevArtists')
+  // .then(response => response.json())
+  // .then(data => {
+  //   // Handle the data
+  // })
+  // .catch(error => {
+  //   // Handle the error
+  // });
+
+  //   populateTracks(firstTracks);
+  //   updateWebSocket();
 }
 
 export async function redirectToAuthCodeFlow(clientId) {
@@ -124,6 +149,7 @@ function populateProfile(profile) {
 }
 
 function populateTracks(topArtists) {
+  console.log("TOP ARTISTS" + topArtists);
     const match = topArtists.match(/1\. (.+)/);
     const match2 = topArtists.match(/2\. (.+)/);
     const match3 = topArtists.match(/3\. (.+)/);
@@ -185,10 +211,11 @@ async function getArtistTracks() {
     const userInput = 'Give me 5 ' + document.getElementById("artistName1").innerText + ' tracks that arent on Spotify or Apple Music but are on Youtube';
     //send this as post request to backend 
     //then plug in string to api (which is secure) and then grab asychnous chatgptresponse 
-    const reply = await sendChatMessage(userInput);
+    // const reply = await sendChatMessage(userInput);
 
-    console.log(reply);
-    return reply;
+    // console.log(reply);
+    // return reply;
+    return userInput;
 
 }
 
