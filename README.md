@@ -67,3 +67,11 @@ For this deliverable I created an HTTP service to host my frontend and provide b
 - **Calls to third party endpoints** - Spotify and ChatGPT like a G. 
 - **Backend service endpoints** - Placeholders for submitting top artsits and grabbing them from database. 
 - **Frontend calls service endpoints** - I did this for grabbing recently uploading and already generating spotify top artsits ChatGPT responses. 
+
+## DB deliverable
+
+For this deliverable I stored and retrieved data from MongoDB.
+
+- **MongoDB Atlas database created** - done!
+- **Endpoints for data** - My stubbed out endpoints now process the data and send it to Mongo.
+- **Stores data in MongoDB** - One of my endpoints is having a hard time deserializing the JSON, however my function to send it to the database does work. 
