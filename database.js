@@ -13,6 +13,7 @@ async function addArtistsSongs(songs) {
     return result;
   }
 
+  //grabbing songs from database
 function getSongs(topArtist) {
   const query = {Artist: topArtist};
 

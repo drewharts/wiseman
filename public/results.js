@@ -1,12 +1,7 @@
+// const axios=require('axios').default;
 const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
-// require('dotenv').config();
-// const apiKey = process.env.API_KEY;
-const apiUrl = 'https://api.openai.com/v1/chat/completions'; // ChatGPT url
-const apiKey = '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'; //ChatGPT api key
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
-// The model ID for ChatGPT (e.g., "gpt-3.5-turbo")
-const modelId = 'gpt-3.5-turbo';
 
 if (!code) {
     redirectToAuthCodeFlow(clientId);
@@ -21,7 +16,6 @@ if (!code) {
 
     //this is getting the required input for chatGPT
     const firstTracks = await getArtistTracks();
-    console.log(firstTracks);
 
     fetch(`/api/chatGPT/${firstTracks}`, {
       method: 'GET',
@@ -32,7 +26,6 @@ if (!code) {
       .then(response => response.json())
       .then(data => {
         populateTracks(data.data);
-        // Do something with the response data
       })
       .catch(error => {
         console.error('Error:', error);
@@ -144,6 +137,13 @@ function populateTracks(topArtists) {
         document.getElementById("artist1Song4").innerText = match4[0];
         document.getElementById("artist1Song5").innerText = match5[0];
 
+        //send this data to DB
+        const topArtistsArray = [match[0], match2[0],match3[0],match4[0],match5[0]];
+        const topArtistBigString = match[0] + match2[0] + match3[0] + match4[0] + match5[0];
+        const DBData = {"Artist": document.getElementById("artistName1").innerText,"Songs": topArtistsArray};
+
+        sendToDB(topArtistsArray);
+
         
     } else {
         const firstTracks = getArtistTracks();
@@ -151,40 +151,31 @@ function populateTracks(topArtists) {
     }
 }
 
+async function sendToDB(topArtistBigString) {
+  const checkingJSON = JSON.stringify(topArtistBigString);
+  fetch('/api/data', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: checkingJSON
+})
+  .then(response => response.json())
+  .then(result => {
+    // Handle the response from the backend
+    console.log(result);
+  })
+  .catch(error => {
+    // Handle any errors that occur during the request
+    console.error('Error:', error);
+  });
 
-async function sendChatMessage(message) {
-  const requestBody = {
-    model: modelId,
-    messages: [{ role: 'system', content: 'You are' }, { role: 'user', content: message }]
-  };
-
-  try {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify(requestBody)
-    });
-
-    if (!response.ok) {
-      throw new Error('Request failed with status code ' + response.status);
-    }
-
-    const { choices } = await response.json();
-
-    if (!choices || choices.length === 0) {
-      throw new Error('Unexpected response from API');
-    }
-
-    const reply = choices[0].message.content;
-    return reply;
-  } catch (error) {
-    console.error('Error:', error.message);
-    // Handle the error gracefully, such as showing an error message to the user
-    // or providing fallback behavior.
-  }
+  // try {
+  //   const response = await axios.post('/api/data', SongInfo);
+  //   console.log(response.data);
+  // } catch (error) {
+  //   console.error('Error:', error);
+  // }
 }
 
 async function getArtistTracks() {

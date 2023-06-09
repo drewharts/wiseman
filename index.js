@@ -1,9 +1,11 @@
-const express = require('express');
+var express = require('express')
+  , bodyParser = require('body-parser');
 const app = express();
 //THIS IS CAUSING FAILURE FOR SOME REASON
 const DB = require('./database.js');
+const { parse } = require('dotenv');
 const apiUrl = 'https://api.openai.com/v1/chat/completions'; // ChatGPT url
-const apiKey = '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'; //ChatGPT api key
+const apiKey = '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'; //ChatGPT api key
 // The model ID for ChatGPT (e.g., "gpt-3.5-turbo")
 const modelId = 'gpt-3.5-turbo';
 
@@ -17,7 +19,6 @@ app.get('/api/chatGPT/:tracks', async(req, res) => {
   const firstTracks = req.params.tracks; // Access the received data from the request body
   console.log(firstTracks);
   const response = await sendChatMessage(firstTracks);
-  console.log("This is my response",response);
 
   // Process the received data and send a response
   const responseData = {
@@ -29,7 +30,11 @@ app.get('/api/chatGPT/:tracks', async(req, res) => {
 });
 
 app.post('/api/data',async (req, res) => {
-  DB.addArtistsSongs(req.body);
+  console.log("ABOUT TO PROCESS JSON ON BACKEND");
+  console.log("RAW REQUEST BODY " + req.body);
+  console.log(parsedJSON);
+  console.log("INDEX.JS INPUT: " + DBData.Artist);
+  DB.addArtistsSongs(array);
   res.send("success");
 })
 
