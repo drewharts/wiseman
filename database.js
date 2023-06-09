@@ -13,6 +13,14 @@ async function addArtistsSongs(songs) {
     return result;
   }
 
-module.exports = { addArtistsSongs};
+function getSongs(topArtist) {
+  const query = {Artist: topArtist};
+
+  const cursor = artistCollection.find(query);
+
+  return cursor.toArray;
+}
+
+module.exports = { addArtistsSongs, getSongs};
 
 
