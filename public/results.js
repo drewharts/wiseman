@@ -31,8 +31,7 @@ if (!code) {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Response:', data);
-        populateTracks(data);
+        populateTracks(data.data);
         // Do something with the response data
       })
       .catch(error => {
@@ -40,24 +39,6 @@ if (!code) {
         // Handle any errors that occur during the request
       });
 
-
-
-  //   //chatGPT stuff
-  //   const firstTracks = await getArtistTracks();
-
-  //   //check to see if user already generated response for specific artist
-
-  //   fetch('/prevArtists')
-  // .then(response => response.json())
-  // .then(data => {
-  //   // Handle the data
-  // })
-  // .catch(error => {
-  //   // Handle the error
-  // });
-
-  //   populateTracks(firstTracks);
-  //   updateWebSocket();
 }
 
 export async function redirectToAuthCodeFlow(clientId) {
@@ -155,14 +136,13 @@ function populateTracks(topArtists) {
     const match3 = topArtists.match(/3\. (.+)/);
     const match4 = topArtists.match(/4\. (.+)/);
     const match5 = topArtists.match(/5\. (.+)/);
-
-    
+ 
     if (match) {
-        document.getElementById("artist1Song1").innerText = match[1];
-        document.getElementById("artist1Song2").innerText = match2[1];
-        document.getElementById("artist1Song3").innerText = match3[1];
-        document.getElementById("artist1Song4").innerText = match4[1];
-        document.getElementById("artist1Song5").innerText = match5[1];
+        document.getElementById("artist1Song1").innerText = match[0];
+        document.getElementById("artist1Song2").innerText = match2[0];
+        document.getElementById("artist1Song3").innerText = match3[0];
+        document.getElementById("artist1Song4").innerText = match4[0];
+        document.getElementById("artist1Song5").innerText = match5[0];
 
         
     } else {
@@ -208,7 +188,7 @@ async function sendChatMessage(message) {
 }
 
 async function getArtistTracks() {
-    const userInput = 'Give me 5 ' + document.getElementById("artistName1").innerText + ' tracks that arent on Spotify or Apple Music but are on Youtube';
+    const userInput = 'Give me 5 ' + document.getElementById("artistName1").innerText + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';
     //send this as post request to backend 
     //then plug in string to api (which is secure) and then grab asychnous chatgptresponse 
     // const reply = await sendChatMessage(userInput);
@@ -233,9 +213,3 @@ var artist2Element = document.getElementById('artist2');
 artist2Element.textContent = "Tom Misch";
 }
 
-// Example usage
-// async function main() {
-//   const userInput = 'Give me 5 Frank Ocean tracks that arent on Spotify or Apple Music';
-//   const reply = await sendChatMessage(userInput);
-//   console.log('ChatGPT Reply:', reply);
-// }
