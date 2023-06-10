@@ -75,3 +75,12 @@ For this deliverable I stored and retrieved data from MongoDB.
 - **MongoDB Atlas database created** - done!
 - **Endpoints for data** - My stubbed out endpoints now process the data and send it to Mongo.
 - **Stores data in MongoDB** - One of my endpoints is having a hard time deserializing the JSON, however my function to send it to the database does work. 
+
+## Login deliverable
+
+For this deliverable I added user registration, login, and authorization.
+
+- **User registration** - Create Spotify account
+- **existing user** - Verifies the user's name and password by going through Spotify Authorization
+- **Use MongoDB to store credentials** - Professor said I could verify through spotify as opposed to MongoDB
+- **Restricts functionality** - You can't pull your data (obviously) until you have logged in.
