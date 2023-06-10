@@ -1,40 +1,47 @@
-var express = require('express')
-  , bodyParser = require('body-parser');
+var express = require('express');
 const app = express();
-//THIS IS CAUSING FAILURE FOR SOME REASON
+app.use(express.static('public'));
+app.use(express.json());
 const DB = require('./database.js');
 const { parse } = require('dotenv');
 const apiUrl = 'https://api.openai.com/v1/chat/completions'; // ChatGPT url
-const apiKey = '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'; //ChatGPT api key
+const apiKey = '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'; //ChatGPT api key
 // The model ID for ChatGPT (e.g., "gpt-3.5-turbo")
 const modelId = 'gpt-3.5-turbo';
 
-app.use(express.static('public'));
+
 
 app.post('/')
 
 // ChatGPT request
 // Endpoint to receive the POST request
-app.get('/api/chatGPT/:tracks', async(req, res) => {
-  const firstTracks = req.params.tracks; // Access the received data from the request body
-  console.log(firstTracks);
-  const response = await sendChatMessage(firstTracks);
+app.post("/api/chatGPT/", async(req, res) => {
+  const artist1 = req.body.artist1;
+  const artist2 = req.body.artist2;
+  const artist3 = req.body.artist3;
+  const artist1Input = 'Give me 5 ' + artist1 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';
+  const artist2Input = 'Give me 5 ' + artist2 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';
+  const artist3Input = 'Give me 5 ' + artist3 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';
+
+
+  const response1 = await sendChatMessage(artist1Input);
+  const response2 = await sendChatMessage(artist2Input);
+  const response3 = await sendChatMessage(artist3Input);
 
   // Process the received data and send a response
   const responseData = {
     message: 'Received the POST request successfully',
-    data: response
+    responseOne: response1,
+    responesTwo: response2,
+    responseThree: response3
   };
 
   res.json(responseData);
 });
 
 app.post('/api/data',async (req, res) => {
-  console.log("ABOUT TO PROCESS JSON ON BACKEND");
-  console.log("RAW REQUEST BODY " + req.body);
-  console.log(parsedJSON);
-  console.log("INDEX.JS INPUT: " + DBData.Artist);
-  DB.addArtistsSongs(array);
+  console.log("RAW REQUEST BODY " + req.body.artist);
+  DB.addArtistsSongs(req.body);
   res.send("success");
 })
 

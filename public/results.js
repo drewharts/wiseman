@@ -15,17 +15,18 @@ if (!code) {
     //make request to chatgpt endpoint
 
     //this is getting the required input for chatGPT
-    const firstTracks = await getArtistTracks();
+    const firstTracks = await getTop3Artists();
 
-    fetch(`/api/chatGPT/${firstTracks}`, {
-      method: 'GET',
+    fetch("/api/chatGPT/", {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: firstTracks,
     })
       .then(response => response.json())
       .then(data => {
-        populateTracks(data.data);
+        populateTracks(data.responseOne,data.responseTwo,data.responseThree);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -122,37 +123,101 @@ function populateProfile(profile) {
     document.getElementById("displayName").innerText = profile.display_name;
 }
 
-function populateTracks(topArtists) {
-  console.log("TOP ARTISTS" + topArtists);
-    const match = topArtists.match(/1\. (.+)/);
-    const match2 = topArtists.match(/2\. (.+)/);
-    const match3 = topArtists.match(/3\. (.+)/);
-    const match4 = topArtists.match(/4\. (.+)/);
-    const match5 = topArtists.match(/5\. (.+)/);
- 
-    if (match) {
-        document.getElementById("artist1Song1").innerText = match[0];
-        document.getElementById("artist1Song2").innerText = match2[0];
-        document.getElementById("artist1Song3").innerText = match3[0];
-        document.getElementById("artist1Song4").innerText = match4[0];
-        document.getElementById("artist1Song5").innerText = match5[0];
+function populateTracks(topArtist1,topArtist2,topArtist3) {
+  console.log("TOP ARTIST 1" + topArtist1);
+  console.log("TOP ARTIST 2" + topArtist2);
+  console.log("TOP ARTIST 3" + topArtist3);
+
+  if (topArtist1 != undefined) {
+    const oneMatch1 = topArtist1.match(/1\. (.+)/);
+    const oneMatch2 = topArtist1.match(/2\. (.+)/);
+    const oneMatch3 = topArtist1.match(/3\. (.+)/);
+    const oneMatch4 = topArtist1.match(/4\. (.+)/);
+    const oneMatch5 = topArtist1.match(/5\. (.+)/);
+
+    document.getElementById("artist1Song1").innerText = oneMatch1[0];
+    document.getElementById("artist1Song2").innerText = oneMatch2[0];
+    document.getElementById("artist1Song3").innerText = oneMatch3[0];
+    document.getElementById("artist1Song4").innerText = oneMatch4[0];
+    document.getElementById("artist1Song5").innerText = oneMatch5[0];
+  } else {
+    const oneMatch1 = "No available Data";
+    const oneMatch2 = "No available Data";
+    const oneMatch3 = "No available Data";
+    const oneMatch4 = "No available Data";
+    const oneMatch5 = "No available Data";
+
+    document.getElementById("artist1Song1").innerText = oneMatch1;
+    document.getElementById("artist1Song2").innerText = oneMatch2;
+    document.getElementById("artist1Song3").innerText = oneMatch3;
+    document.getElementById("artist1Song4").innerText = oneMatch4;
+    document.getElementById("artist1Song5").innerText = oneMatch5;
+  }
+  
+  if (topArtist2 === undefined) {
+    const twoMatch1 = "No available Data";
+    const twoMatch2 = "No available Data";
+    const twoMatch3 = "No available Data";
+    const twoMatch4 = "No available Data";
+    const twoMatch5 = "No available Data";
+
+    document.getElementById("artist2Song1").innerText = twoMatch1;
+    document.getElementById("artist2Song2").innerText = twoMatch2;
+    document.getElementById("artist2Song3").innerText = twoMatch3;
+    document.getElementById("artist2Song4").innerText = twoMatch4;
+    document.getElementById("artist2Song5").innerText = twoMatch5;
+  } else {
+    const twoMatch1 = topArtist2.match(/1\. (.+)/);
+    const twoMatch2 = topArtist2.match(/2\. (.+)/);
+    const twoMatch3 = topArtist2.match(/3\. (.+)/);
+    const twoMatch4 = topArtist2.match(/4\. (.+)/);
+    const twoMatch5 = topArtist2.match(/5\. (.+)/);
+
+    document.getElementById("artist2Song1").innerText = twoMatch1[0];
+    document.getElementById("artist2Song2").innerText = twoMatch2[0];
+    document.getElementById("artist2Song3").innerText = twoMatch3[0];
+    document.getElementById("artist2Song4").innerText = twoMatch4[0];
+    document.getElementById("artist2Song5").innerText = twoMatch5[0];
+  }
+  if (topArtist3 != undefined) {
+    const threeMatch1 = topArtist3.match(/1\. (.+)/);
+    const threeMatch2 = topArtist3.match(/2\. (.+)/);
+    const threeMatch3 = topArtist3.match(/3\. (.+)/);
+    const threeMatch4 = topArtist3.match(/4\. (.+)/);
+    const threeMatch5 = topArtist3.match(/5\. (.+)/);
+
+    document.getElementById("artist3Song1").innerText = threeMatch1[0];
+    document.getElementById("artist3Song2").innerText = threeMatch2[0];
+    document.getElementById("artist3Song3").innerText = threeMatch3[0];
+    document.getElementById("artist3Song4").innerText = threeMatch4[0];
+    document.getElementById("artist3Song5").innerText = threeMatch5[0];
+  } else {
+    const threeMatch1 = "No available Data";
+    const threeMatch2 = "No available Data";
+    const threeMatch3 = "No available Data";
+    const threeMatch4 = "No available Data";
+    const threeMatch5 = "No available Data";
+
+    document.getElementById("artist3Song1").innerText = threeMatch1;
+    document.getElementById("artist3Song2").innerText = threeMatch2;
+    document.getElementById("artist3Song3").innerText = threeMatch3;
+    document.getElementById("artist3Song4").innerText = threeMatch4;
+    document.getElementById("artist3Song5").innerText = threeMatch5;
+  }  
 
         //send this data to DB
         const topArtistsArray = [match[0], match2[0],match3[0],match4[0],match5[0]];
-        const topArtistBigString = match[0] + match2[0] + match3[0] + match4[0] + match5[0];
-        const DBData = {"Artist": document.getElementById("artistName1").innerText,"Songs": topArtistsArray};
 
         sendToDB(topArtistsArray);
 
         
-    } else {
-        const firstTracks = getArtistTracks();
-        populateTracks(firstTracks);
-    }
 }
 
 async function sendToDB(topArtistBigString) {
-  const checkingJSON = JSON.stringify(topArtistBigString);
+  const checkingJSON = JSON.stringify({
+    artist: document.getElementById("artistName1").innerText,
+    songs: topArtistBigString
+  });
   fetch('/api/data', {
   method: 'POST',
   headers: {
@@ -188,6 +253,16 @@ async function getArtistTracks() {
     // return reply;
     return userInput;
 
+}
+
+async function getTop3Artists() {
+  const artistJSON = JSON.stringify({
+    artist1: document.getElementById("artistName1").innerText,
+    artist2: document.getElementById("artistName2").innerText,
+    artist3: document.getElementById("artistName3").innerText
+  })
+
+  return artistJSON;
 }
 
 function updateWebSocket() {
