@@ -5,7 +5,7 @@ app.use(express.json());
 const DB = require('./database.js');
 const { parse } = require('dotenv');
 const apiUrl = 'https://api.openai.com/v1/chat/completions'; // ChatGPT url
-const apiKey = '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'; //ChatGPT api key
+const apiKey = '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'; //ChatGPT api key
 // The model ID for ChatGPT (e.g., "gpt-3.5-turbo")
 const modelId = 'gpt-3.5-turbo';
 
