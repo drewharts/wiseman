@@ -1,11 +1,14 @@
 var express = require('express');
+require('dotenv').config()
+// const apiKey = process.env.OPENAI_API_KEY; //ChatGPT api key
+const jsonData = require('./data.json');
+const apiKey = jsonData.key; 
 const app = express();
 app.use(express.static('public'));
 app.use(express.json());
 const DB = require('./database.js');
-const { parse } = require('dotenv');
 const apiUrl = 'https://api.openai.com/v1/chat/completions'; // ChatGPT url
-const apiKey = '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'; //ChatGPT api key
+
 // The model ID for ChatGPT (e.g., "gpt-3.5-turbo")
 const modelId = 'gpt-3.5-turbo';
 
@@ -22,8 +25,11 @@ app.post("/api/chatGPT/", async(req, res) => {
   const artist1Input = 'Give me 5 ' + artist1 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';
   const artist2Input = 'Give me 5 ' + artist2 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';
   const artist3Input = 'Give me 5 ' + artist3 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';
+  console.log(artist1Input);
+  console.log(artist2Input);
+  console.log(artist3Input);
 
-
+  console.log("KEY HERE" + process.env.OPENAI_API_KEY);
   const response1 = await sendChatMessage(artist1Input);
   const response2 = await sendChatMessage(artist2Input);
   const response3 = await sendChatMessage(artist3Input);
@@ -69,6 +75,7 @@ console.log("Request body: " + requestBody.model);
     });
 console.log(response);
     if (!response.ok) {
+      console.log(response);
       throw new Error('Request failed with status code ' + response.status);
     }
 
