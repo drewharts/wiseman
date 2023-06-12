@@ -8,6 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wiseman</title>
     <link rel="icon" href="favicon.ico" />
+
+    <title>Chat</title>
+    <style>
+      #chat-log {
+        width: 500px;
+        height: 500px;
+        border: 1px solid black;
+        overflow-y: scroll;
+      }
+    </style>
   </head>
   <body>
     <!-- Use header, main, and footer elements to give semantic structure -->
@@ -82,9 +92,30 @@
     </section>
       
   <div id="websocket-container">
-      <h2 id="favorite-artists-heading"></h2>
-      <h3 id="artist1"></h3>
-      <h3 id="artist2"></h3>
+    <div id="chat-log"></div>
+    <input id="chat-message" type="text">
+    <button id="send-button">Send</button>
+  
+    <script>
+      const chatLog = document.getElementById('chat-log');
+      const chatMessage = document.getElementById('chat-message');
+      const sendButton = document.getElementById('send-button');
+  
+      const ws = new WebSocket({port:8080});
+  
+      ws.onmessage = (event) => {
+        const message = document.createElement('div');
+        message.innerText = event.data;
+        chatLog.appendChild(message);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      };
+  
+      sendButton.onclick = () => {
+        const message = chatMessage.value;
+        chatMessage.value = '';
+        ws.send(message);
+      };
+    </script>
   </div>
     <!-- This is where websocket implementation will go displaying your friends current favorite artists-->
     </main>

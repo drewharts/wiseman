@@ -12,6 +12,29 @@ const apiUrl = 'https://api.openai.com/v1/chat/completions'; // ChatGPT url
 // The model ID for ChatGPT (e.g., "gpt-3.5-turbo")
 const modelId = 'gpt-3.5-turbo';
 
+const port = 4000;
+
+// server.js
+
+const WebSocket = require('ws');
+
+const server = new WebSocket.Server({ port: 8080 });
+
+server.on('connection', ws => {
+  ws.on('message', message => {
+    console.log('Received: ', message);
+    server.clients.forEach(client => {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
+    });
+  });
+  
+  ws.on('close', () => {
+    console.log('Client disconnected');
+  });
+});
+
 
 
 app.post('/')
@@ -54,8 +77,6 @@ app.post('/api/data',async (req, res) => {
   res.send("success");
 })
 
-
-const port = 4000;
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
