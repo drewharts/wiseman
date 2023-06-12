@@ -29,16 +29,19 @@ app.post("/api/chatGPT/", async(req, res) => {
   console.log(artist2Input);
   console.log(artist3Input);
 
-  console.log("KEY HERE" + process.env.OPENAI_API_KEY);
   const response1 = await sendChatMessage(artist1Input);
+  console.log(response1);
   const response2 = await sendChatMessage(artist2Input);
+  console.log(response2);
   const response3 = await sendChatMessage(artist3Input);
+  console.log(response3);
+
 
   // Process the received data and send a response
   const responseData = {
     message: 'Received the POST request successfully',
     responseOne: response1,
-    responesTwo: response2,
+    responseTwo: response2,
     responseThree: response3
   };
 

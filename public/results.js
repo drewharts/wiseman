@@ -154,7 +154,20 @@ function populateTracks(topArtist1,topArtist2,topArtist3) {
     document.getElementById("artist1Song5").innerText = oneMatch5;
   }
   
-  if (topArtist2 === undefined) {
+  if (topArtist2 != undefined) {
+    const twoMatch1 = topArtist2.match(/1\. (.+)/);
+    const twoMatch2 = topArtist2.match(/2\. (.+)/);
+    const twoMatch3 = topArtist2.match(/3\. (.+)/);
+    const twoMatch4 = topArtist2.match(/4\. (.+)/);
+    const twoMatch5 = topArtist2.match(/5\. (.+)/);
+
+
+    document.getElementById("artist2Song1").innerText = twoMatch1;
+    document.getElementById("artist2Song2").innerText = twoMatch2;
+    document.getElementById("artist2Song3").innerText = twoMatch3;
+    document.getElementById("artist2Song4").innerText = twoMatch4;
+    document.getElementById("artist2Song5").innerText = twoMatch5;
+  } else {
     const twoMatch1 = "No available Data";
     const twoMatch2 = "No available Data";
     const twoMatch3 = "No available Data";
@@ -166,18 +179,6 @@ function populateTracks(topArtist1,topArtist2,topArtist3) {
     document.getElementById("artist2Song3").innerText = twoMatch3;
     document.getElementById("artist2Song4").innerText = twoMatch4;
     document.getElementById("artist2Song5").innerText = twoMatch5;
-  } else {
-    const twoMatch1 = topArtist2.match(/1\. (.+)/);
-    const twoMatch2 = topArtist2.match(/2\. (.+)/);
-    const twoMatch3 = topArtist2.match(/3\. (.+)/);
-    const twoMatch4 = topArtist2.match(/4\. (.+)/);
-    const twoMatch5 = topArtist2.match(/5\. (.+)/);
-
-    document.getElementById("artist2Song1").innerText = twoMatch1[0];
-    document.getElementById("artist2Song2").innerText = twoMatch2[0];
-    document.getElementById("artist2Song3").innerText = twoMatch3[0];
-    document.getElementById("artist2Song4").innerText = twoMatch4[0];
-    document.getElementById("artist2Song5").innerText = twoMatch5[0];
   }
   if (topArtist3 != undefined) {
     const threeMatch1 = topArtist3.match(/1\. (.+)/);
