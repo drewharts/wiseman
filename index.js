@@ -16,32 +16,31 @@ const modelId = 'gpt-3.5-turbo';
 
 const port = 4000;
 
-//web socket code
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
-
-wss.on('connection', ws => {
-    ws.on('message', message => {
-        console.log('Received:', message);
-        // broadcast message to all clients
-        wss.clients.forEach(client => {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(message);
-            }
-        });
-    });
-
-    ws.on('close', () => {
-        console.log('Lost a client');
-    });
-
-    console.log('New client connected');
+const server = app.listen(8000, () => {
+  console.log('Server started on port 8000');
 });
 
-app.use(express.static('public'));
+// Use the server created by express instead of creating a second one.
+//const server = http.createServer(app);
 
-server.listen(8000, () => {
-    console.log('Server started on port 8000');
+const wss = new WebSocket.Server({server});
+
+wss.on('connection', (ws) => {
+  ws.on('message', (message) => {
+    console.log('Received:', message);
+    // broadcast message to all clients
+    wss.clients.forEach((client) => {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
+    });
+  });
+
+  ws.on('close', () => {
+    console.log('Lost a client');
+  });
+
+  console.log('New client connected');
 });
 
 
