@@ -84,3 +84,12 @@ For this deliverable I added user registration, login, and authorization.
 - **existing user** - Verifies the user's name and password by going through Spotify Authorization
 - **Use MongoDB to store credentials** - Professor said I could verify through spotify as opposed to MongoDB
 - **Restricts functionality** - You can't pull your data (obviously) until you have logged in.
+
+## WebSocket deliverable
+
+For this deliverable I enabled realtime chat of users of the service.
+
+- **Backend listens for WebSocket connection** - done!
+- **Frontend makes WebSocket connection** - done!
+- **Data sent over WebSocket connection** - done!
+- **WebSocket data displayed** - Chat between users
