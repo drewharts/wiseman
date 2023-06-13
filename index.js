@@ -20,19 +20,28 @@ const port = 4000;
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-wss.on('connection', (ws) => {
-  ws.on('message', (message) => {
-      // Broadcast the message to all clients
-      wss.clients.forEach((client) => {
-          if (client !== ws && client.readyState === WebSocket.OPEN) {
-              client.send(message);
-          }
-      });
-  });
+wss.on('connection', ws => {
+    ws.on('message', message => {
+        console.log('Received:', message);
+        // broadcast message to all clients
+        wss.clients.forEach(client => {
+            if (client !== ws && client.readyState === WebSocket.OPEN) {
+                client.send(message);
+            }
+        });
+    });
+
+    ws.on('close', () => {
+        console.log('Lost a client');
+    });
+
+    console.log('New client connected');
 });
 
-server.listen(8080, () => {
-  console.log('Server is running on port 5000');
+app.use(express.static('public'));
+
+server.listen(8000, () => {
+    console.log('Server started on port 8000');
 });
 
 

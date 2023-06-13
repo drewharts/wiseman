@@ -82,28 +82,26 @@
     </section>
       
   <div id="websocket-container">
-    <div id="chat-log" style="height: 300px; border: 1px solid black; overflow: auto;"></div>
-    <input id="chat-message-input" type="text">
-    <button id="chat-message-submit">Send</button>
+    <input type="text" id="messageInput" placeholder="Enter message">
+    <button onclick="sendMessage()">Send</button>
+
+    <ul id="messages"></ul>
 
     <script>
-        const chatLog = document.getElementById('chat-log');
-        const chatMessageInput = document.getElementById('chat-message-input');
-        const chatMessageSubmit = document.getElementById('chat-message-submit');
+        const ws = new WebSocket('wss://startup.drewharts.com:8000');
 
-        const socket = new WebSocket('wss://startup.drewharts.com:8080');
-
-        socket.onmessage = function(event) {
-            const messageElem = document.createElement('div');
-            messageElem.innerHTML = event.data;
-            chatLog.appendChild(messageElem);
+        ws.onmessage = function(event) {
+            var li = document.createElement('li');
+            li.innerText = event.data;
+            document.getElementById('messages').appendChild(li);
         };
 
-        chatMessageSubmit.addEventListener('click', function() {
-            const message = chatMessageInput.value;
-            socket.send(message);
-            chatMessageInput.value = '';
-        });
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            ws.send(messageInput.value);
+            messageInput.value = '';
+        }
+    </script>
     </script>
     </script>
   </div>
