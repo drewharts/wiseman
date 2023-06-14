@@ -1,6 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 export function Results() {
+    const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
+
+    const [profile, setProfile] = useState(null);
+    const [topArtists, setTopArtists] = useState(null);
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get("code");
+
+        if (!code) {
+            redirectToAuthCodeFlow(clientId);
+        } else {
+            getAccessToken(clientId, code).then(token => {
+                fetchProfile(token).then(profileData => {
+                    setProfile(profileData);
+                    fetchTop(token).then(artistData => {
+                        setTopArtists(artistData.items);
+                    });
+                });
+            })
+        }
+    }, [clientId]);
 
     const generateCodeChallenge = async (codeVerifier) => {
         const data = new TextEncoder().encode(codeVerifier);
@@ -30,7 +52,7 @@ export function Results() {
         const params = new URLSearchParams();
         params.append("client_id", clientId);
         params.append("response_type", "code");
-        params.append("redirect_uri", "https://startup.drewharts.com/spotify.html");
+        params.append("redirect_uri", "https://startup.drewharts.com/results");
         params.append("scope", "user-read-private user-read-email");
         params.append("code_challenge_method", "S256");
         params.append("code_challenge", challenge);
@@ -45,7 +67,7 @@ export function Results() {
         params.append("client_id", clientId);
         params.append("grant_type", "authorization_code");
         params.append("code", code);
-        params.append("redirect_uri", "https://startup.drewharts.com/spotify.html");
+        params.append("redirect_uri", "https://startup.drewharts.com/results");
         params.append("code_verifier", verifier);
     
         const result = await fetch("https://accounts.spotify.com/api/token", {
@@ -58,17 +80,25 @@ export function Results() {
         return access_token;
     };
 
+    const fetchTop = async (token) => {
+        const result = await fetch("https://api.spotify.com/v1/me/top/artists?limit=3&offset=0", {
+            method: "GET", headers: { Authorization: `Bearer ${token}` }
+        });
     
+        return await result.json();
+    };
+
+
     return(
         <main>
         <section id="top data">
           <h1>Results</h1>
-          <p>Welcome <span id="displayName"></span></p>
+          <p>Welcome {profile ? profile.display_name : ""}</p>
           <div id="database placeholder"></div>
           <h2>Artists</h2>
           <ul>
             <li>
-              <h3><span id="artistName1"></span></h3>
+              <h3>{topArtists ? topArtists.items[0].name : ""}</h3>
               <ul>
                 <li><span id="artist1Song1"></span></li>
                 <li><span id="artist1Song2"></span></li>
@@ -78,7 +108,7 @@ export function Results() {
               </ul>
             </li>
             <li>
-              <h3><span id="artistName2"></span></h3>
+              <h3>{topArtists ? topArtists.items[1].name : ""}</h3>
               <ul>
                 <li><span id="artist2Song1"></span></li>
                 <li><span id="artist2Song2"></span></li>
@@ -88,7 +118,7 @@ export function Results() {
               </ul>
             </li>
             <li>
-              <h3><span id="artistName3"></span></h3>
+              <h3>{topArtists ? topArtists.items[2].name : ""}</h3>
               <ul>
                 <li><span id="artist3Song1"></span></li>
                 <li><span id="artist3Song2"></span></li>
