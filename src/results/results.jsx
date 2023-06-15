@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 
 export function Results() {
-    const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
-
-    const [profile, setProfile] = useState(null);
+    // const [profile, setProfile] = useState(null);
     const [topArtists, setTopArtists] = useState(null);
+    const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -13,14 +12,11 @@ export function Results() {
         if (!code) {
             redirectToAuthCodeFlow(clientId);
         } else {
-            getAccessToken(clientId, code).then(token => {
-                fetchProfile(token).then(profileData => {
-                    setProfile(profileData);
-                    fetchTop(token).then(artistData => {
-                        setTopArtists(artistData.items);
-                    });
+            getAccessToken(clientId,code).then(token => {
+                fetchTop(token).then(artistData => {
+                    setTopArtists(artistData);
                 });
-            })
+            });
         }
     }, [clientId]);
 
@@ -80,9 +76,27 @@ export function Results() {
         return access_token;
     };
 
+    // const fetchTop = async (token) => {
+    //     const result = await fetch("https://api.spotify.com/v1/me/top/artists?time_range=short_term", {
+    //         method: "GET", headers: { Authorization: `Bearer ${token}` }
+    //     });
+    
+    //     if (!result.ok) {
+    //         console.error(`Error: HTTP ${result.status} - ${result.statusText}`);
+    //         return null;
+    //     }
+    
+    //     return await result.json();
+    // };
+
     const fetchTop = async (token) => {
-        const result = await fetch("https://api.spotify.com/v1/me/top/artists?limit=3&offset=0", {
-            method: "GET", headers: { Authorization: `Bearer ${token}` }
+        const result = await fetch("https://api.spotify.com/v1/me/top/artists?time_range=short_term", {
+            method: "GET", 
+            headers: { 
+                'Authorization': 'Bearer ' + token,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         });
     
         return await result.json();
@@ -101,7 +115,8 @@ export function Results() {
         <main>
         <section id="top data">
           <h1>Results</h1>
-          <p>Welcome {profile ? profile.display_name : ""}</p>
+          {/* {profile ? profile.display_name : ""} */}
+          <p>Welcome </p>
           <div id="database placeholder"></div>
           <h2>Artists</h2>
           <ul>
