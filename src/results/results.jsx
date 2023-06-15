@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 export function Results() {
-    // const [profile, setProfile] = useState(null);
+    const [profile, setProfile] = useState(null);
     const [topArtists, setTopArtists] = useState(null);
     const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
 
@@ -16,7 +16,10 @@ export function Results() {
                 fetchTop(token).then(artistData => {
                     setTopArtists(artistData);
                 });
-            });
+                fetchProfile(token).then(profileData => {
+                    setProfile(profileData);
+                });
+            })
         }
     }, [clientId]);
 
@@ -49,7 +52,7 @@ export function Results() {
         params.append("client_id", clientId);
         params.append("response_type", "code");
         params.append("redirect_uri", "https://startup.drewharts.com/results");
-        params.append("scope", "user-read-private user-read-email");
+        params.append("scope", "user-top-read");
         params.append("code_challenge_method", "S256");
         params.append("code_challenge", challenge);
     
@@ -76,31 +79,19 @@ export function Results() {
         return access_token;
     };
 
-    // const fetchTop = async (token) => {
-    //     const result = await fetch("https://api.spotify.com/v1/me/top/artists?time_range=short_term", {
-    //         method: "GET", headers: { Authorization: `Bearer ${token}` }
-    //     });
-    
-    //     if (!result.ok) {
-    //         console.error(`Error: HTTP ${result.status} - ${result.statusText}`);
-    //         return null;
-    //     }
-    
-    //     return await result.json();
-    // };
-
     const fetchTop = async (token) => {
         const result = await fetch("https://api.spotify.com/v1/me/top/artists?time_range=short_term", {
-            method: "GET", 
-            headers: { 
-                'Authorization': 'Bearer ' + token,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+            method: "GET", headers: { Authorization: `Bearer ${token}` }
         });
+    
+        if (!result.ok) {
+            console.error(`Error: HTTP ${result.status} - ${result.statusText}`);
+            return null;
+        }
     
         return await result.json();
     };
+
 
     const fetchProfile = async (token) => {
         const result = await fetch("https://api.spotify.com/v1/me", {
@@ -115,8 +106,7 @@ export function Results() {
         <main>
         <section id="top data">
           <h1>Results</h1>
-          {/* {profile ? profile.display_name : ""} */}
-          <p>Welcome </p>
+          <p>Welcome {profile ? profile.display_name : ""}</p>
           <div id="database placeholder"></div>
           <h2>Artists</h2>
           <ul>
