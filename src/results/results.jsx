@@ -3,7 +3,11 @@ import React, {useEffect, useState} from 'react';
 export function Results() {
     const [profile, setProfile] = useState(null);
     const [topArtists, setTopArtists] = useState(null);
+    const [firstTracks, setFirstTracks] = useState(null);
     const [songData, setSongData] = useState(null);
+    const [artist1Songs, setArtist1Songs] = useState([]);
+    const [artist2Songs, setArtist2Songs] = useState([]);
+    const [artist3Songs, setArtist3Songs] = useState([]);
     const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
 
     useEffect(() => {
@@ -116,27 +120,6 @@ export function Results() {
         return await result.json();
     };
 
-    // const fetchSongs = async (firstTracks) => {
-    //     fetch("/api/chatGPT/", {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         },
-    //         body: firstTracks,
-    //       })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log("DOES THIS GET REACHED");
-    //             console.log(data);
-    //         //   console.log(data.responseOne + data.responseTwo + data.responseThree);
-    //         //this is where you populate tracks
-    //         })
-    //         .catch(error => {
-    //           console.error("There was an error with the fetch");
-    //           // Handle any errors that occur during the request
-    //         });
-    // }
-
     const fetchSongs = async (firstTracks) => {
         try {
           const response = await fetch("/api/chatGPT/", {
@@ -152,8 +135,13 @@ export function Results() {
           }
       
           const data = await response.json();
-          setSongData(data); // Update the state variable with the fetched data
-          console.log(data);
+          //figure out a way to display data here
+          console.log(data.responseOne);
+          setArtist1Songs(data.responseOne);
+          console.log(data.responseTwo);
+          setArtist2Songs(data.responseTwo);
+          console.log(data.responseThree);
+          setArtist3Songs(data.responseThree);
         } catch (error) {
           console.error("There was an error with the fetch:", error);
           // Handle the error
@@ -169,11 +157,11 @@ export function Results() {
           <p>Welcome {profile ? profile.display_name : ""}</p>
           <div id="database placeholder"></div>
           <h2>Artists</h2>
-          <ul>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
             <li>
               <h3>{topArtists ? topArtists.items[0].name : ""}</h3>
-              <ul>
-                <li><span id="artist1Song1"></span></li>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li>{artist1Songs ? artist1Songs : ""}</li>
                 <li><span id="artist1Song2"></span></li>
                 <li><span id="artist1Song3"></span></li>
                 <li><span id="artist1Song4"></span></li>
@@ -182,8 +170,8 @@ export function Results() {
             </li>
             <li>
               <h3>{topArtists ? topArtists.items[1].name : ""}</h3>
-              <ul>
-                <li><span id="artist2Song1"></span></li>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li>{artist2Songs ? artist2Songs : ""}</li>
                 <li><span id="artist2Song2"></span></li>
                 <li><span id="artist2Song3"></span></li>
                 <li><span id="artist2Song4"></span></li>
@@ -192,8 +180,8 @@ export function Results() {
             </li>
             <li>
               <h3>{topArtists ? topArtists.items[2].name : ""}</h3>
-              <ul>
-                <li><span id="artist3Song1"></span></li>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li>{artist3Songs ? artist3Songs : ""}</li>
                 <li><span id="artist3Song2"></span></li>
                 <li><span id="artist3Song3"></span></li>
                 <li><span id="artist3Song4"></span></li>
