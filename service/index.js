@@ -1,7 +1,5 @@
 var express = require('express');
 require('dotenv').config()
-
-// const apiKey = process.env.OPENAI_API_KEY; //ChatGPT api key
 const jsonData = require('./data.json');
 const apiKey = jsonData.key; 
 const app = express();
@@ -10,38 +8,40 @@ app.use(express.static('public'));
 app.use(express.json());
 const DB = require('./database.js');
 const apiUrl = 'https://api.openai.com/v1/chat/completions'; // ChatGPT url
+const axios = require('axios');
+
 
 // The model ID for ChatGPT (e.g., "gpt-3.5-turbo")
 const modelId = 'gpt-3.5-turbo';
 
 const port = 4000;
 
-const server = app.listen(8000, () => {
-  console.log('Server started on port 8000');
-});
+// const server = app.listen(8000, () => {
+//   console.log('Server started on port 8000');
+// });
 
-// Use the server created by express instead of creating a second one.
-//const server = http.createServer(app);
+// // Use the server created by express instead of creating a second one.
+// //const server = http.createServer(app);
 
-const wss = new WebSocket.Server({server});
+// const wss = new WebSocket.Server({server});
 
-wss.on('connection', (ws) => {
-  ws.on('message', (message) => {
-    console.log('Received:', message);
-    // broadcast message to all clients
-    wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(message);
-      }
-    });
-  });
+// wss.on('connection', (ws) => {
+//   ws.on('message', (message) => {
+//     console.log('Received:', message);
+//     // broadcast message to all clients
+//     wss.clients.forEach((client) => {
+//       if (client !== ws && client.readyState === WebSocket.OPEN) {
+//         client.send(message);
+//       }
+//     });
+//   });
 
-  ws.on('close', () => {
-    console.log('Lost a client');
-  });
+//   ws.on('close', () => {
+//     console.log('Lost a client');
+//   });
 
-  console.log('New client connected');
-});
+//   console.log('New client connected');
+// });
 
 
 
@@ -90,28 +90,63 @@ app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
+// async function sendChatMessage(message) {
+//   const requestBody = {
+//     model: modelId,
+//     messages: [{ role: 'system', content: 'You are' }, { role: 'user', content: message }]
+//   };
+// console.log("Request body: " + requestBody.model);
+//   try {
+//     const response = await fetch(apiUrl, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': `Bearer ${apiKey}`
+//       },
+//       body: JSON.stringify(requestBody)
+//     });
+// console.log(response);
+//     if (!response.ok) {
+//       console.log(response);
+//       throw new Error('Request failed with status code ' + response.status);
+//     }
+
+//     const { choices } = await response.json();
+
+//     if (!choices || choices.length === 0) {
+//       throw new Error('Unexpected response from API');
+//     }
+
+//     const reply = choices[0].message.content;
+//     return reply;
+//   } catch (error) {
+//     console.error('Error:', error.message);
+//     // Handle the error gracefully, such as showing an error message to the user
+//     // or providing fallback behavior.
+//   }
+// }
+
+
+// Update the sendChatMessage function
 async function sendChatMessage(message) {
   const requestBody = {
     model: modelId,
     messages: [{ role: 'system', content: 'You are' }, { role: 'user', content: message }]
   };
-console.log("Request body: " + requestBody.model);
+
   try {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
+    const response = await axios.post(apiUrl, requestBody, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify(requestBody)
+      }
     });
-console.log(response);
-    if (!response.ok) {
-      console.log(response);
+
+    if (response.status !== 200) {
       throw new Error('Request failed with status code ' + response.status);
     }
 
-    const { choices } = await response.json();
+    const { choices } = response.data;
 
     if (!choices || choices.length === 0) {
       throw new Error('Unexpected response from API');
@@ -125,3 +160,8 @@ console.log(response);
     // or providing fallback behavior.
   }
 }
+
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+

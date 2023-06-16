@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 export function Results() {
     const [profile, setProfile] = useState(null);
     const [topArtists, setTopArtists] = useState(null);
+    const [songData, setSongData] = useState(null);
     const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
 
     useEffect(() => {
@@ -12,16 +13,30 @@ export function Results() {
         if (!code) {
             redirectToAuthCodeFlow(clientId);
         } else {
-            getAccessToken(clientId,code).then(token => {
+            getAccessToken(clientId, code).then(token => {
                 fetchTop(token).then(artistData => {
-                    setTopArtists(artistData);
+                  setTopArtists(artistData);
+                  getTop3Artists(artistData).then(firstTracks => {
+                    setFirstTracks(firstTracks);
+                    fetchSongs(firstTracks); // Move the fetchSongs call here
+                    console.log("FIRST TRACKS HERE: " + firstTracks);
+                  });
                 });
                 fetchProfile(token).then(profileData => {
-                    setProfile(profileData);
+                  setProfile(profileData);
                 });
-            })
+              });
         }
     }, [clientId]);
+
+    const getTop3Artists = async (topArtists) => {
+        const artistJSON = JSON.stringify({
+            artist1: topArtists.items[0].name,
+            artist2: topArtists.items[1].name,
+            artist3: topArtists.items[2].name
+        })
+        return artistJSON;
+    }
 
     const generateCodeChallenge = async (codeVerifier) => {
         const data = new TextEncoder().encode(codeVerifier);
@@ -100,6 +115,51 @@ export function Results() {
     
         return await result.json();
     };
+
+    // const fetchSongs = async (firstTracks) => {
+    //     fetch("/api/chatGPT/", {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: firstTracks,
+    //       })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log("DOES THIS GET REACHED");
+    //             console.log(data);
+    //         //   console.log(data.responseOne + data.responseTwo + data.responseThree);
+    //         //this is where you populate tracks
+    //         })
+    //         .catch(error => {
+    //           console.error("There was an error with the fetch");
+    //           // Handle any errors that occur during the request
+    //         });
+    // }
+
+    const fetchSongs = async (firstTracks) => {
+        try {
+          const response = await fetch("/api/chatGPT/", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ firstTracks }), // Wrap firstTracks in an object to ensure it's sent as JSON
+          });
+      
+          if (!response.ok) {
+            throw new Error('Request failed with status ' + response.status);
+          }
+      
+          const data = await response.json();
+          setSongData(data); // Update the state variable with the fetched data
+          console.log(data);
+        } catch (error) {
+          console.error("There was an error with the fetch:", error);
+          // Handle the error
+        }
+      };
+      
 
 
     return(
