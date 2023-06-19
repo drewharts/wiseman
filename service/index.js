@@ -16,32 +16,28 @@ const modelId = 'gpt-3.5-turbo';
 
 const port = 4000;
 
-// const server = app.listen(8000, () => {
-//   console.log('Server started on port 8000');
-// });
+// Create a WebSocket server on port 8080
+const wss = new WebSocket.Server({ port: 8080 });
 
-// // Use the server created by express instead of creating a second one.
-// //const server = http.createServer(app);
+// Function to handle new connections
+wss.on('connection', ws => {
+  console.log('New client connected');
 
-// const wss = new WebSocket.Server({server});
+  // Function to handle incoming messages
+  ws.on('message', message => {
+    console.log(`Received message: ${message}`);
 
-// wss.on('connection', (ws) => {
-//   ws.on('message', (message) => {
-//     console.log('Received:', message);
-//     // broadcast message to all clients
-//     wss.clients.forEach((client) => {
-//       if (client !== ws && client.readyState === WebSocket.OPEN) {
-//         client.send(message);
-//       }
-//     });
-//   });
+    // Echo the message back to the client
+    ws.send(`Server: ${message}`);
+  });
 
-//   ws.on('close', () => {
-//     console.log('Lost a client');
-//   });
+  // Function to handle closed connections
+  ws.on('close', () => {
+    console.log('Client disconnected');
+  });
+});
 
-//   console.log('New client connected');
-// });
+console.log('WebSocket server started at wss://drewharts.com:8080');
 
 
 

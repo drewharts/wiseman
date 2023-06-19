@@ -1,6 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
+
+
+const websocketUrl = "wss://startup.drewharts.com:8080";
 
 export function Results() {
+    // New state variable for storing chat messages
+    const [messages, setMessages] = useState([]);
+    
+    // New state variable for storing user's input
+    const [inputMessage, setInputMessage] = useState("");
+    
+    // We use useRef to store the WebSocket object to persist across renders
+    const websocket = useRef(null);
+
     const [profile, setProfile] = useState(null);
     const [topArtists, setTopArtists] = useState(null);
     const [firstTracks, setFirstTracks] = useState(null);
@@ -31,6 +43,26 @@ export function Results() {
                 });
               });
         }
+
+        // Initialize the WebSocket connection
+        websocket.current = new WebSocket(websocketUrl);
+
+        websocket.current.onopen = (event) => {
+            console.log("Connected to the WebSocket server", event);
+        };
+
+        websocket.current.onerror = (error) => {
+            console.error("WebSocket error", error);
+        };
+
+        websocket.current.onmessage = (event) => {
+            setMessages(prevMessages => [...prevMessages, event.data]);
+        };
+
+        // Cleanup before unmounting or when dependencies change
+        return () => {
+            websocket.current.close();
+        };
     }, [clientId]);
 
     const getTop3Artists = async (topArtists) => {
@@ -147,6 +179,15 @@ export function Results() {
           // Handle the error
         }
       };
+
+      const sendMessage = () => {
+        if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
+            websocket.current.send(inputMessage);
+            setInputMessage(""); // Clear the input after sending
+        } else {
+            console.log("WEBSOCKET ISN'T OPEN");
+        }
+    };
       
 
 
@@ -190,6 +231,18 @@ export function Results() {
             </li>
           </ul>
       </section>
+
+      <section id="chat">
+            <h2>Live Chat</h2>
+            <ul>
+                {messages.map((message, index) => (
+                    <li key={index}>{message}</li>
+                ))}
+            </ul>
+            <input type="text" value={inputMessage} onChange={e => setInputMessage(e.target.value)} />
+            <button onClick={sendMessage}>Send</button>
+        </section>
+
       </main>
     )
 }

@@ -1,4 +1,3 @@
-// const axios=require('axios').default;
 const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
@@ -12,7 +11,6 @@ if (!code) {
     populateProfile(profile);
     populateUIArtists(topArtists);
 
-    //make request to chatgpt endpoint
 
     //this is getting the required input for chatGPT
     const firstTracks = await getTop3Artists();
@@ -266,17 +264,4 @@ async function getTop3Artists() {
   return artistJSON;
 }
 
-function updateWebSocket() {
-    // Update the <h2> element
-var headingElement = document.getElementById('favorite-artists-heading');
-headingElement.textContent = "Drewharts's favorite Artists";
-
-// Update the first <h3> element
-var artist1Element = document.getElementById('artist1');
-artist1Element.textContent = "Frank Ocean";
-
-// Update the second <h3> element
-var artist2Element = document.getElementById('artist2');
-artist2Element.textContent = "Tom Misch";
-}
 
