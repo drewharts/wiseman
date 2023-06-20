@@ -45,19 +45,19 @@ export function Results() {
 
         // Adjust the webSocket protocol to what is being used for HTTP
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        socket.current = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
         // Display that we have opened the webSocket
-        socket.onopen = (event) => {
+        socket.current.onopen = (event) => {
             // appendMsg('system', 'websocket', 'connected');
             console.log("connected");
         };
-        socket.onclose = (event) => {
+        socket.current.onclose = (event) => {
             // appendMsg('system', 'websocket', 'disconnected');
             console.log("disconnected");
         }
 
-        socket.onmessage = (event) => {
+        socket.current.onmessage = (event) => {
             setMessages(prevMessages => [...prevMessages, event.data]);
         };
 
