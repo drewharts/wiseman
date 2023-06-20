@@ -3,7 +3,7 @@ require('dotenv').config()
 const jsonData = require('./data.json');
 const apiKey = jsonData.key; 
 const app = express();
-const WebSocket = require('ws');
+const { WebSocketServer } = require('ws');
 app.use(express.static('public'));
 app.use(express.json());
 const DB = require('./database.js');
@@ -16,8 +16,18 @@ const modelId = 'gpt-3.5-turbo';
 
 const port = 4000;
 
-// Create a WebSocket server on port 8080
-const wss = new WebSocket.Server({ port: 8080 });
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+const wss = new WebSocketServer({ noServer: true });
+
+// Handle the protocol upgrade from HTTP to WebSocket
+httpService.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, function done(ws) {
+    wss.emit('connection', ws, request);
+  });
+});
 
 // Function to handle new connections
 wss.on('connection', ws => {
@@ -36,8 +46,6 @@ wss.on('connection', ws => {
     console.log('Client disconnected');
   });
 });
-
-console.log('WebSocket server started at wss://drewharts.com:8080');
 
 
 
@@ -82,45 +90,10 @@ app.post('/api/data',async (req, res) => {
 })
 
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// });
 
-// async function sendChatMessage(message) {
-//   const requestBody = {
-//     model: modelId,
-//     messages: [{ role: 'system', content: 'You are' }, { role: 'user', content: message }]
-//   };
-// console.log("Request body: " + requestBody.model);
-//   try {
-//     const response = await fetch(apiUrl, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': `Bearer ${apiKey}`
-//       },
-//       body: JSON.stringify(requestBody)
-//     });
-// console.log(response);
-//     if (!response.ok) {
-//       console.log(response);
-//       throw new Error('Request failed with status code ' + response.status);
-//     }
-
-//     const { choices } = await response.json();
-
-//     if (!choices || choices.length === 0) {
-//       throw new Error('Unexpected response from API');
-//     }
-
-//     const reply = choices[0].message.content;
-//     return reply;
-//   } catch (error) {
-//     console.error('Error:', error.message);
-//     // Handle the error gracefully, such as showing an error message to the user
-//     // or providing fallback behavior.
-//   }
-// }
 
 
 // Update the sendChatMessage function
@@ -160,4 +133,5 @@ async function sendChatMessage(message) {
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
+
 

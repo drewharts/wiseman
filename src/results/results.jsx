@@ -9,10 +9,9 @@ export function Results() {
     
     // New state variable for storing user's input
     const [inputMessage, setInputMessage] = useState("");
-    
-    // We use useRef to store the WebSocket object to persist across renders
-    const websocket = useRef(null);
 
+    const socket = useRef(null);
+    
     const [profile, setProfile] = useState(null);
     const [topArtists, setTopArtists] = useState(null);
     const [firstTracks, setFirstTracks] = useState(null);
@@ -44,24 +43,27 @@ export function Results() {
               });
         }
 
-        // Initialize the WebSocket connection
-        websocket.current = new WebSocket(websocketUrl);
+        // Adjust the webSocket protocol to what is being used for HTTP
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
-        websocket.current.onopen = (event) => {
-            console.log("Connected to the WebSocket server", event);
+        // Display that we have opened the webSocket
+        socket.onopen = (event) => {
+            // appendMsg('system', 'websocket', 'connected');
+            console.log("connected");
         };
+        socket.onclose = (event) => {
+            // appendMsg('system', 'websocket', 'disconnected');
+            console.log("disconnected");
+        }
 
-        websocket.current.onerror = (error) => {
-            console.error("WebSocket error", error);
-        };
-
-        websocket.current.onmessage = (event) => {
+        socket.onmessage = (event) => {
             setMessages(prevMessages => [...prevMessages, event.data]);
         };
 
         // Cleanup before unmounting or when dependencies change
         return () => {
-            websocket.current.close();
+            socket.current.close();
         };
     }, [clientId]);
 
@@ -181,8 +183,8 @@ export function Results() {
       };
 
       const sendMessage = () => {
-        if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
-            websocket.current.send(inputMessage);
+        if (socket.current && socket.current.readyState === WebSocket.OPEN) {
+            socket.current.send(inputMessage);
             setInputMessage(""); // Clear the input after sending
         } else {
             console.log("WEBSOCKET ISN'T OPEN");
