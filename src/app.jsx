@@ -20,18 +20,19 @@ export default function App() {
 
           <nav>
             <menu>
-              <li><NavLink to="/">Home</NavLink></li>
-              <li><NavLink to="/spotify">Spotify Login</NavLink></li>
-              <li><NavLink to="/results">Results</NavLink></li>
+              {/* <li><NavLink to="/">Home</NavLink></li>
+              <li><NavLink to="/spotify">Spotify Login</NavLink></li> */}
+              {/* <li><NavLink to="/">Results</NavLink></li> */}
             </menu>
           </nav>
         </header>
 
+
         <main>
           <Routes>
-            <Route path = '/' element={<Login/>}/>
-            <Route path = '/spotify' index element={<Spotify/>}/>
-            <Route path = '/results' element={<Results/>}/>
+            {/* <Route path = '/' element={<Login/>}/> */}
+            {/* <Route path = '/spotify' index element={<Spotify/>}/> */}
+            <Route path = '/' element={<Results/>}/>
             <Route path = '/*' element={<NotFound/>}/>
           </Routes>
         </main>
