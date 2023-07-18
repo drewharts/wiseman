@@ -1,14 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 
-
-const websocketUrl = "wss://startup.drewharts.com:8080";
-
 export function Results() {
-    // New state variable for storing chat messages
-    const [messages, setMessages] = useState([]);
-    
-    // New state variable for storing user's input
-    const [inputMessage, setInputMessage] = useState("");
 
     const socket = useRef(null);
     
@@ -42,30 +34,7 @@ export function Results() {
                 });
               });
         }
-
-        // Adjust the webSocket protocol to what is being used for HTTP
-        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-        socket.current = new WebSocket(`${protocol}://${window.location.host}/ws`);
-
-        // Display that we have opened the webSocket
-        socket.current.onopen = (event) => {
-            // appendMsg('system', 'websocket', 'connected');
-            console.log("connected");
-        };
-        socket.current.onclose = (event) => {
-            // appendMsg('system', 'websocket', 'disconnected');
-            console.log("disconnected");
-        }
-
-        socket.current.onmessage = (event) => {
-            setMessages(prevMessages => [...prevMessages, event.data]);
-        };
-
-        // Cleanup before unmounting or when dependencies change
-        return () => {
-            socket.current.close();
-        };
-    }, [clientId]);
+  }, [clientId]);
 
     const getTop3Artists = async (topArtists) => {
         const artistJSON = JSON.stringify({
@@ -104,7 +73,7 @@ export function Results() {
         const params = new URLSearchParams();
         params.append("client_id", clientId);
         params.append("response_type", "code");
-        params.append("redirect_uri", "https://startup.drewharts.com/results");
+        params.append("redirect_uri", "https://startup.drewharts.com");
         params.append("scope", "user-top-read");
         params.append("code_challenge_method", "S256");
         params.append("code_challenge", challenge);
@@ -119,7 +88,7 @@ export function Results() {
         params.append("client_id", clientId);
         params.append("grant_type", "authorization_code");
         params.append("code", code);
-        params.append("redirect_uri", "https://startup.drewharts.com/results");
+        params.append("redirect_uri", "https://startup.drewharts.com");
         params.append("code_verifier", verifier);
     
         const result = await fetch("https://accounts.spotify.com/api/token", {
@@ -181,15 +150,6 @@ export function Results() {
           // Handle the error
         }
       };
-
-      const sendMessage = () => {
-        if (socket.current && socket.current.readyState === WebSocket.OPEN) {
-            socket.current.send(inputMessage);
-            setInputMessage(""); // Clear the input after sending
-        } else {
-            console.log("WEBSOCKET ISN'T OPEN");
-        }
-    };
       
 
 
@@ -233,18 +193,6 @@ export function Results() {
             </li>
           </ul>
       </section>
-
-      <section id="chat">
-            <h2>Live Chat</h2>
-            <ul>
-                {messages.map((message, index) => (
-                    <li key={index}>{message}</li>
-                ))}
-            </ul>
-            <input type="text" value={inputMessage} onChange={e => setInputMessage(e.target.value)} />
-            <button onClick={sendMessage}>Send</button>
-        </section>
-
       </main>
     )
 }
