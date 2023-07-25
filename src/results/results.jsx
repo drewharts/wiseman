@@ -1,8 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 
 export function Results() {
-
-    const socket = useRef(null);
     
     const [profile, setProfile] = useState(null);
     const [topArtists, setTopArtists] = useState(null);
@@ -155,6 +153,7 @@ export function Results() {
 
     return(
         <main>
+          
         <section id="top data">
           <h1>Results</h1>
           <p>Welcome {profile ? profile.display_name : ""}</p>
