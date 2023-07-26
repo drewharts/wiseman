@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-
+import ArtistRectangle from '../components/ArtistRectange';
 export function Results() {
     
     const [profile, setProfile] = useState(null);
@@ -155,13 +155,23 @@ export function Results() {
         <main>
           
         <section id="top data">
-          <h1>Results</h1>
-          <p>Welcome {profile ? profile.display_name : ""}</p>
+          <h2>Welcome {profile ? profile.display_name : ""}</h2>
           <div id="database placeholder"></div>
-          <h2>Artists</h2>
           <ul style={{ listStyle: 'none', padding: 0 }}>
             <li>
-              <h3>{topArtists ? topArtists.items[0].name : ""}</h3>
+              <div className = "image-container">
+                <ArtistRectangle title={topArtists ? topArtists.items[0].name : ""}>
+                  
+                </ArtistRectangle>
+
+                <ArtistRectangle title = {topArtists ? topArtists.items[1].name : ""}>
+
+                </ArtistRectangle>
+
+                <ArtistRectangle title= {topArtists ? topArtists.items[2].name : ""}>
+
+                </ArtistRectangle>
+              </div>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li>{artist1Songs ? artist1Songs : ""}</li>
                 <li><span id="artist1Song2"></span></li>
@@ -171,7 +181,6 @@ export function Results() {
               </ul>
             </li>
             <li>
-              <h3>{topArtists ? topArtists.items[1].name : ""}</h3>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li>{artist2Songs ? artist2Songs : ""}</li>
                 <li><span id="artist2Song2"></span></li>
@@ -181,7 +190,6 @@ export function Results() {
               </ul>
             </li>
             <li>
-              <h3>{topArtists ? topArtists.items[2].name : ""}</h3>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li>{artist3Songs ? artist3Songs : ""}</li>
                 <li><span id="artist3Song2"></span></li>
