@@ -93,3 +93,8 @@ For this deliverable I enabled realtime chat of users of the service.
 - **Frontend makes WebSocket connection** - done!
 - **Data sent over WebSocket connection** - done!
 - **WebSocket data displayed** - Chat between users
+
+## NOTES
+
+./deployReact.sh -k ~/keys/production.pem -h yourdomain.click -s startup
+
