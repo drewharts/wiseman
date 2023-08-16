@@ -17,7 +17,7 @@
   
   .text-overlay {
     position: absolute;
-    bottom: 0; /* Position the text overlay at the bottom */
+    top: 0; /* Position the text overlay at the bottom */
     left: 0;
     width: 100%;
     display: flex;
