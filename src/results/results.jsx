@@ -162,20 +162,15 @@ export function Results() {
               <div className = "image-container">
                 <div className = "header-image-container">
                   <h1>{topArtists ? topArtists.items[0].name : ""}</h1>
-                  <ArtistRectangle>
-                    <li>{artist1Songs ? artist1Songs : ""}</li>
-                  </ArtistRectangle>
+                  <ArtistRectangle children = {artist1Songs ? artist1Songs : ""}/>
                 </div>
                 <div className = "header-image-container">
                   <h1>{topArtists ? topArtists.items[1].name : ""}</h1>
-                  <ArtistRectangle>
-                    <li>{artist2Songs ? artist2Songs : ""}</li>
-                  </ArtistRectangle>
+                  <ArtistRectangle children = {artist2Songs ? artist2Songs : ""}/>
                 </div>
                 <div className = "header-image-container">
                   <h1>{topArtists ? topArtists.items[2].name : ""}</h1>
-                  <ArtistRectangle children={artist3Songs ? artist3Songs : ""}>
-                  </ArtistRectangle>
+                  <ArtistRectangle children={artist3Songs ? artist3Songs : ""}/>
                 </div>
               </div>
               <ul style={{ listStyle: 'none', padding: 0 }}>
