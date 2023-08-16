@@ -3,7 +3,6 @@ require('dotenv').config()
 const jsonData = require('./data.json');
 const apiKey = jsonData.key; 
 const app = express();
-const { WebSocketServer } = require('ws');
 app.use(express.static('public'));
 app.use(express.json());
 const DB = require('./database.js');
@@ -20,32 +19,6 @@ const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-const wss = new WebSocketServer({ noServer: true });
-
-// Handle the protocol upgrade from HTTP to WebSocket
-httpService.on('upgrade', (request, socket, head) => {
-  wss.handleUpgrade(request, socket, head, function done(ws) {
-    wss.emit('connection', ws, request);
-  });
-});
-
-// Function to handle new connections
-wss.on('connection', ws => {
-  console.log('New client connected');
-
-  // Function to handle incoming messages
-  ws.on('message', message => {
-    console.log(`Received message: ${message}`);
-
-    // Echo the message back to the client
-    ws.send(`Server: ${message}`);
-  });
-
-  // Function to handle closed connections
-  ws.on('close', () => {
-    console.log('Client disconnected');
-  });
-});
 
 
 
@@ -54,9 +27,12 @@ app.post('/')
 // ChatGPT request
 // Endpoint to receive the POST request
 app.post("/api/chatGPT/", async(req, res) => {
-  const artist1 = req.body.artist1;
-  const artist2 = req.body.artist2;
-  const artist3 = req.body.artist3;
+  const jsonString = req.body.firstTracks;
+  const jsonObject = JSON.parse(jsonString);
+  artist1 = jsonObject.artist1;
+  artist2 = jsonObject.artist2;
+  artist3 = jsonObject.artist3;
+
   const artist1Input = 'Give me 5 ' + artist1 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';
   const artist2Input = 'Give me 5 ' + artist2 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';
   const artist3Input = 'Give me 5 ' + artist3 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a list of the 5 songs and nothing else.';

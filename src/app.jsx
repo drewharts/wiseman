@@ -5,6 +5,7 @@ import './app.css';
 import {Login} from './login/login';
 import {Spotify} from './spotify/spotify';
 import {Results} from './results/results';
+import { newResults } from './newResults/newResults';
 
 function NotFound() {
   return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
@@ -19,11 +20,6 @@ export default function App() {
           <h1>Wiseman<sup>&reg;</sup></h1>
 
           <nav>
-            <menu>
-              {/* <li><NavLink to="/">Home</NavLink></li>
-              <li><NavLink to="/spotify">Spotify Login</NavLink></li> */}
-              {/* <li><NavLink to="/">Results</NavLink></li> */}
-            </menu>
           </nav>
         </header>
 

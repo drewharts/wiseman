@@ -1,0 +1,35 @@
+/* ArtistRectangle.css */
+
+.artist-rectangle-container {
+    display: flex; /* Use flex display to make components sit side by side */
+  }
+  
+  .image-container {
+    position: relative;
+    flex: 1; /* Distribute available space equally among components */
+    margin: 0 10px; /* Add some margin between components */
+    text-align: center; /* Center the title text */
+  }
+  
+  .image-title {
+    margin-top: 0; /* Remove default margin from h1 element */
+  }
+  
+  .text-overlay {
+    position: absolute;
+    bottom: 0; /* Position the text overlay at the bottom */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+  }
+  .header-image-container {
+    display: flex;
+    flex-direction: column;
+  }
+  

@@ -160,20 +160,25 @@ export function Results() {
           <ul style={{ listStyle: 'none', padding: 0 }}>
             <li>
               <div className = "image-container">
-                <ArtistRectangle title={topArtists ? topArtists.items[0].name : ""}>
-                  
-                </ArtistRectangle>
-
-                <ArtistRectangle title = {topArtists ? topArtists.items[1].name : ""}>
-
-                </ArtistRectangle>
-
-                <ArtistRectangle title= {topArtists ? topArtists.items[2].name : ""}>
-
-                </ArtistRectangle>
+                <div className = "header-image-container">
+                  <h1>{topArtists ? topArtists.items[0].name : ""}</h1>
+                  <ArtistRectangle>
+                    <li>{artist1Songs ? artist1Songs : ""}</li>
+                  </ArtistRectangle>
+                </div>
+                <div className = "header-image-container">
+                  <h1>{topArtists ? topArtists.items[1].name : ""}</h1>
+                  <ArtistRectangle>
+                    <li>{artist2Songs ? artist2Songs : ""}</li>
+                  </ArtistRectangle>
+                </div>
+                <div className = "header-image-container">
+                  <h1>{topArtists ? topArtists.items[2].name : ""}</h1>
+                  <ArtistRectangle children={artist3Songs ? artist3Songs : ""}>
+                  </ArtistRectangle>
+                </div>
               </div>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li>{artist1Songs ? artist1Songs : ""}</li>
                 <li><span id="artist1Song2"></span></li>
                 <li><span id="artist1Song3"></span></li>
                 <li><span id="artist1Song4"></span></li>
@@ -182,7 +187,6 @@ export function Results() {
             </li>
             <li>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li>{artist2Songs ? artist2Songs : ""}</li>
                 <li><span id="artist2Song2"></span></li>
                 <li><span id="artist2Song3"></span></li>
                 <li><span id="artist2Song4"></span></li>
@@ -191,7 +195,6 @@ export function Results() {
             </li>
             <li>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li>{artist3Songs ? artist3Songs : ""}</li>
                 <li><span id="artist3Song2"></span></li>
                 <li><span id="artist3Song3"></span></li>
                 <li><span id="artist3Song4"></span></li>

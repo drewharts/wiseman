@@ -9,10 +9,25 @@ html {
   height:100%;
 }
 
+.image-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-container > div {
+  flex: 1;
+  margin-right: 20px; /* Adjust the margin as needed */
+}
+
+.image-container > div:last-child {
+  margin-right: 0; /* Remove margin for the last child */
+}
+
+
 /* Set a modern font */
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-image: url('../FrankOcean.jpg');
+  background-color: #1ED760;
   background-size: cover;
   background-position: center;
   text-align: center;
@@ -22,7 +37,7 @@ body {
 
 /* Style the header */
 header {
-  background-color: #5a7862;
+  background-color: #1ED760;
   color: #fff;
   padding: 20px;
   border-bottom: none; /* Remove the line separating the header and body */
