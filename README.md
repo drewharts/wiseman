@@ -98,3 +98,5 @@ For this deliverable I enabled realtime chat of users of the service.
 
 ./deployReact.sh -k ~/keys/production.pem -h yourdomain.click -s startup
 
+connect to server by ssh -i <key> ubuntu@<your web address>
+
