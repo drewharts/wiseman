@@ -2,10 +2,8 @@ import React from 'react';
 import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom'; // Changed here
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
-import {Login} from './login/login';
-import {Spotify} from './spotify/spotify';
 import {Results} from './results/results';
-import { newResults } from './newResults/newResults';
+
 
 function NotFound() {
   return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
@@ -18,7 +16,6 @@ export default function App() {
 
         <header>
           <h1>Wiseman<sup>&reg;</sup></h1>
-
           <nav>
           </nav>
         </header>
