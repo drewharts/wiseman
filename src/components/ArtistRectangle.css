@@ -5,7 +5,7 @@
   }
   
   .image-container {
-    position: relative;
+    position:relative;
     flex: 1; /* Distribute available space equally among components */
     margin: 0 10px; /* Add some margin between components */
     text-align: center; /* Center the title text */
@@ -31,5 +31,6 @@
   .header-image-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   
