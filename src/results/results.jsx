@@ -139,7 +139,7 @@ export function Results() {
           const data = await response.json();
           //figure out a way to display data here
           console.log(data.responseOne);
-          setArtist1Songs(data.responseOne);
+          setArtist1Songs(processSongString(data.responseOne));
           console.log(data.responseTwo);
           setArtist2Songs(data.responseTwo);
           console.log(data.responseThree);
@@ -149,6 +149,19 @@ export function Results() {
           // Handle the error
         }
       };
+
+      function processSongString(songString) {
+        // Split the string into individual songs
+        const songList = songString.split("\n");
+    
+        // Remove any empty strings or whitespace from the list
+        const filteredSongList = songList.filter(song => song.trim() !== '');
+    
+        // Sort the list of songs
+        const sortedSongs = filteredSongList.sort();
+    
+        return sortedSongs;
+    }
       
 
 
