@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import ArtistRectangle from '../components/ArtistRectange';
+import Songrectangle from '../components/SongRectangle';
 export function Results() {
     
     const [profile, setProfile] = useState(null);
@@ -162,15 +163,39 @@ export function Results() {
               <div className = "image-container">
                 <div className = "header-image-container">
                   <h1>{topArtists ? topArtists.items[0].name : ""}</h1>
-                  <ArtistRectangle children = {artist1Songs ? artist1Songs : ""}/>
+                  <ArtistRectangle children = {artist1Songs ? artist1Songs : ""}>
+                    <div className = "song-rectangle-container">
+                      <Songrectangle/>
+                      <Songrectangle/>
+                      <Songrectangle/>
+                      <Songrectangle/>
+                      <Songrectangle/>
+                    </div>
+                  </ArtistRectangle>
                 </div>
                 <div className = "header-image-container">
                   <h1>{topArtists ? topArtists.items[1].name : ""}</h1>
-                  <ArtistRectangle children = {artist2Songs ? artist2Songs : ""}/>
+                  <ArtistRectangle children = {artist2Songs ? artist2Songs : ""}>
+                    <div className = "song-rectangle-container">
+                        <Songrectangle/>
+                        <Songrectangle/>
+                        <Songrectangle/>
+                        <Songrectangle/>
+                        <Songrectangle/>
+                      </div>
+                  </ArtistRectangle>
                 </div>
                 <div className = "header-image-container">
                   <h1>{topArtists ? topArtists.items[2].name : ""}</h1>
-                  <ArtistRectangle children={artist3Songs ? artist3Songs : ""}/>
+                  <ArtistRectangle children={artist3Songs ? artist3Songs : ""}>
+                    <div className = "song-rectangle-container">
+                        <Songrectangle/>
+                        <Songrectangle/>
+                        <Songrectangle/>
+                        <Songrectangle/>
+                        <Songrectangle/>
+                      </div>
+                  </ArtistRectangle>
                 </div>
               </div>
               <ul style={{ listStyle: 'none', padding: 0 }}>
