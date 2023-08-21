@@ -176,9 +176,9 @@ export function Results() {
               <div className = "image-container">
                 <div className = "header-image-container">
                   <h1>{topArtists ? topArtists.items[0].name : ""}</h1>
-                  <ArtistRectangle children = {artist1Songs ? artist1Songs : ""}>
+                  <ArtistRectangle>
                     <div className = "song-rectangle-container">
-                      <Songrectangle/>
+                      <ArtistRectangle children={artist1Songs.length > 0 ? artist1Songs[0] : ""} />
                       <Songrectangle/>
                       <Songrectangle/>
                       <Songrectangle/>
