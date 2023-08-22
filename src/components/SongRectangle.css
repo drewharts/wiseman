@@ -1,0 +1,21 @@
+.song-rectangle-container {
+    flex-direction: column;
+    display: inline-block;
+    align-items: center;
+    position: relative;
+}
+
+.image-component {
+    margin: 30px 0; /* Add vertical spacing between components */
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%; /* Vertically center the text */
+    left: 50%; /* Horizontally center the text */
+    transform: translate(-50%, -50%);
+    color: #1ed760; /* Text color */
+    padding: 10px; /* Padding around the text */
+    font-size: 18px;
+    font-weight: bold;
+  }
