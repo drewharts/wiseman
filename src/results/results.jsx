@@ -141,9 +141,9 @@ export function Results() {
           console.log(data.responseOne);
           setArtist1Songs(processSongString(data.responseOne));
           console.log(data.responseTwo);
-          setArtist2Songs(data.responseTwo);
+          setArtist2Songs(processSongString(data.responseTwo));
           console.log(data.responseThree);
-          setArtist3Songs(data.responseThree);
+          setArtist3Songs(processSongString(data.responseThree));
         } catch (error) {
           console.error("There was an error with the fetch:", error);
           // Handle the error
@@ -178,11 +178,11 @@ export function Results() {
                   <h1>{topArtists ? topArtists.items[0].name : ""}</h1>
                   <ArtistRectangle>
                     <div className = "song-rectangle-container">
-                      <ArtistRectangle children={artist1Songs.length > 0 ? artist1Songs[0] : ""} />
-                      <Songrectangle/>
-                      <Songrectangle/>
-                      <Songrectangle/>
-                      <Songrectangle/>
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[0] : ""} />
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[1] : ""} />
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[2] : ""} />
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[3] : ""} />
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[4] : ""} />
                     </div>
                   </ArtistRectangle>
                 </div>
@@ -190,11 +190,11 @@ export function Results() {
                   <h1>{topArtists ? topArtists.items[1].name : ""}</h1>
                   <ArtistRectangle children = {artist2Songs ? artist2Songs : ""}>
                     <div className = "song-rectangle-container">
-                        <Songrectangle/>
-                        <Songrectangle/>
-                        <Songrectangle/>
-                        <Songrectangle/>
-                        <Songrectangle/>
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[0] : ""} />
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[1] : ""} />
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[2] : ""} />
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[3] : ""} />
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[4] : ""} />
                       </div>
                   </ArtistRectangle>
                 </div>
@@ -202,11 +202,11 @@ export function Results() {
                   <h1>{topArtists ? topArtists.items[2].name : ""}</h1>
                   <ArtistRectangle children={artist3Songs ? artist3Songs : ""}>
                     <div className = "song-rectangle-container">
-                        <Songrectangle/>
-                        <Songrectangle/>
-                        <Songrectangle/>
-                        <Songrectangle/>
-                        <Songrectangle/>
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[0] : ""} />
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[1] : ""} />
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[2] : ""} />
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[3] : ""} />
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[4] : ""} />
                       </div>
                   </ArtistRectangle>
                 </div>
