@@ -31,7 +31,7 @@ export default function App() {
         </main>
 
         <footer>
-          <span className="text-reset">Author Name</span> {/* Changed here, use className instead of class */}
+          <span className="text-reset">Drew Hartsfield</span> {/* Changed here, use className instead of class */}
           <br />
           <a href="https://github.com/drewharts/startup">GitHub</a>
         </footer>
