@@ -187,19 +187,11 @@ export function Results() {
                   <h1>{topArtists ? topArtists.items[0].name : ""}</h1>
                   <ArtistRectangle>
                     <div className = "song-rectangle-container">
-                      {loadingArtist1 ? (
-                        <Loading /> // Render loading component while data is loading
-                      ) : (
-                          <>
-                            <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[0] : ""} />
-                            {/* Repeat for other songs */}
-                          </>
-                      )}
-                      {/* <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[0] : ""} /> */}
-                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[1] : ""} />
-                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[2] : ""} />
-                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[3] : ""} />
-                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[4] : ""} />
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[0] : ""} loading={loadingArtist1} />
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[1] : ""} loading={loadingArtist1} />
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[2] : ""} loading={loadingArtist1} />
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[3] : ""} loading={loadingArtist1} />
+                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[4] : ""} loading={loadingArtist1} />
                     </div>
                   </ArtistRectangle>
                 </div>
@@ -207,11 +199,11 @@ export function Results() {
                   <h1>{topArtists ? topArtists.items[1].name : ""}</h1>
                   <ArtistRectangle children = {artist2Songs ? artist2Songs : ""}>
                     <div className = "song-rectangle-container">
-                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[0] : ""} />
-                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[1] : ""} />
-                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[2] : ""} />
-                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[3] : ""} />
-                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[4] : ""} />
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[0] : ""} loading={loadingArtist2} />
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[1] : ""} loading={loadingArtist2} />
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[2] : ""} loading={loadingArtist2} />
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[3] : ""} loading={loadingArtist2} />
+                        <Songrectangle children={artist2Songs.length > 0 ? artist2Songs[4] : ""} loading={loadingArtist2} />
                       </div>
                   </ArtistRectangle>
                 </div>
@@ -219,11 +211,11 @@ export function Results() {
                   <h1>{topArtists ? topArtists.items[2].name : ""}</h1>
                   <ArtistRectangle children={artist3Songs ? artist3Songs : ""}>
                     <div className = "song-rectangle-container">
-                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[0] : ""} />
-                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[1] : ""} />
-                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[2] : ""} />
-                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[3] : ""} />
-                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[4] : ""} />
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[0] : ""} loading={loadingArtist3} />
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[1] : ""} loading={loadingArtist3} />
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[2] : ""} loading={loadingArtist3} />
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[3] : ""} loading={loadingArtist3} />
+                        <Songrectangle children={artist3Songs.length > 0 ? artist3Songs[4] : ""} loading={loadingArtist3} />
                       </div>
                   </ArtistRectangle>
                 </div>

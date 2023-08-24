@@ -1,0 +1,6 @@
+.loading-container {
+    flex-direction: column;
+    display: inline-block;
+    align-items: center;
+    position: relative;
+}
