@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react';
 import ArtistRectangle from '../components/ArtistRectange';
 import Songrectangle from '../components/SongRectangle';
+import Loading from '../components/loading'
 export function Results() {
     
     const [profile, setProfile] = useState(null);
@@ -10,6 +11,11 @@ export function Results() {
     const [artist1Songs, setArtist1Songs] = useState([]);
     const [artist2Songs, setArtist2Songs] = useState([]);
     const [artist3Songs, setArtist3Songs] = useState([]);
+    //Loading state for the Songs
+    const [loadingArtist1, setLoadingArtist1] = useState(true);
+    const [loadingArtist2, setLoadingArtist2] = useState(true);
+    const [loadingArtist3, setLoadingArtist3] = useState(true);
+
     const clientId = "34e8bb8fea5945318f1e45de7e51b9b4"; // Replace with your Spotify client ID
 
     useEffect(() => {
@@ -140,10 +146,13 @@ export function Results() {
           //figure out a way to display data here
           console.log(data.responseOne);
           setArtist1Songs(processSongString(data.responseOne));
+          setLoadingArtist1(false);
           console.log(data.responseTwo);
           setArtist2Songs(processSongString(data.responseTwo));
+          setLoadingArtist2(false);
           console.log(data.responseThree);
           setArtist3Songs(processSongString(data.responseThree));
+          setLoadingArtist3(false);
         } catch (error) {
           console.error("There was an error with the fetch:", error);
           // Handle the error
@@ -178,7 +187,15 @@ export function Results() {
                   <h1>{topArtists ? topArtists.items[0].name : ""}</h1>
                   <ArtistRectangle>
                     <div className = "song-rectangle-container">
-                      <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[0] : ""} />
+                      {loadingArtist1 ? (
+                        <Loading /> // Render loading component while data is loading
+                      ) : (
+                          <>
+                            <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[0] : ""} />
+                            {/* Repeat for other songs */}
+                          </>
+                      )}
+                      {/* <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[0] : ""} /> */}
                       <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[1] : ""} />
                       <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[2] : ""} />
                       <Songrectangle children={artist1Songs.length > 0 ? artist1Songs[3] : ""} />
