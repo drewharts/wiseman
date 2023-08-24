@@ -10,4 +10,9 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      external: ['react-loading'], // Add any other external modules here
+    },
+  },
 });
