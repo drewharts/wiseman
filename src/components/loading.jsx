@@ -4,7 +4,7 @@ import './loading.css'
 
 const Loading = () => (
   <div className="loading-container">
-    <ReactLoading type="spin" color="#1ed760" height={30} width={30} />
+    <ReactLoading type="spin" color="#034732" height={30} width={30} />
   </div>
 );
 
