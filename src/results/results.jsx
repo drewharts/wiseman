@@ -119,6 +119,19 @@ export function Results() {
         return await result.json();
     };
 
+    const fetchTopSongs = async (token) => {
+      const result = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=short_term", {
+          method: "GET", headers: { Authorization: `Bearer ${token}` }
+      });
+  
+      if (!result.ok) {
+          console.error(`Error: HTTP ${result.status} - ${result.statusText}`);
+          return null;
+      }
+  
+      return await result.json();
+  };
+
 
     const fetchProfile = async (token) => {
         const result = await fetch("https://api.spotify.com/v1/me", {
