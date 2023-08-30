@@ -33,9 +33,9 @@ app.post("/api/chatGPT/", async(req, res) => {
   artist2 = jsonObject.artist2;
   artist3 = jsonObject.artist3;
 
-  const artist1Input = 'Give me 5 ' + artist2 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a dictionary of the 5 songs, their links, and nothing else.';
-  const artist2Input = 'Give me 5 ' + artist2 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a dictionary of the 5 songs, their links, and nothing else.';
-  const artist3Input = 'Give me 5 ' + artist3 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a dictionary of the 5 songs, their links, and nothing else.';
+  const artist1Input = 'Give me 5 ' + artist2 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a dictionary of the 5 songs and nothing else.';
+  const artist2Input = 'Give me 5 ' + artist2 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a dictionary of the 5 songs and nothing else.';
+  const artist3Input = 'Give me 5 ' + artist3 + ' tracks that arent on Spotify or Apple Music but are on Youtube. Only response with a dictionary of the 5 songs and nothing else.';
   console.log(artist1Input);
   console.log(artist2Input);
   console.log(artist3Input);
