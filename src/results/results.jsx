@@ -6,6 +6,7 @@ export function Results() {
     
     const [profile, setProfile] = useState(null);
     const [topArtists, setTopArtists] = useState(null);
+    const [topSongs, setTopSongs] = useState(null);
     const [firstTracks, setFirstTracks] = useState(null);
     const [songData, setSongData] = useState(null);
     const [artist1Songs, setArtist1Songs] = useState([]);
@@ -37,6 +38,9 @@ export function Results() {
                 fetchProfile(token).then(profileData => {
                   setProfile(profileData);
                 });
+                fetchTopSongs(token).then(songData => {
+
+                })
               });
         }
   }, [clientId]);
