@@ -39,8 +39,9 @@ export function Results() {
                   setProfile(profileData);
                 });
                 fetchTopSongs(token).then(songData => {
-
-                })
+                  setTopSongs(songData);
+                  console.log(songData);
+                });
               });
         }
   }, [clientId]);
