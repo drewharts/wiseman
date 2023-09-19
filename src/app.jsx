@@ -31,7 +31,9 @@ export default function App() {
         </main>
 
         <footer>
-          <span className="text-reset">Drew Hartsfield</span> {/* Changed here, use className instead of class */}
+          <span className="text-reset">Drew Hartsfield</span>
+          <br></br>
+          <span className="text-reset"><small>*Wiseman's spotify usage has developer's status only. Email drewharts8@gmail.com to use Wiseman.</small></span>
           <br />
           <a href="https://github.com/drewharts/startup">GitHub</a>
         </footer>
